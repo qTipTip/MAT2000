@@ -1,5 +1,6 @@
 import numpy as np
 import mayavi.mlab as mlab
+
 def implicit_plot(expr, ext_grid, fig_handle=None, Nx=101, Ny=101, Nz=101,
                  col_isurf=(50/255, 199/255, 152/255), col_osurf=(240/255,36/255,87/255),
                  opa_val=0.8, opaque=True, ori_axis=True, **kwargs):
