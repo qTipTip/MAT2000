@@ -20,7 +20,9 @@
 \begin{abstract}
    In this short paper we look at Euler's polyhedron formula. This formula was
    one of my first experiences with more abstract mathematics, and I have loved
-   it ever since. The proof is very simple, and extremely elegant.
+   it ever since. The proof we consider here is very simple, however there is a
+   surprising amount of different proofs for this same result. \cite{proofs}
+   presents a list of 20 of them.
 \end{abstract}
 \maketitle
 
@@ -131,6 +133,12 @@ Note that neither of these operations change the quantity of interest. One
 removes one edge and one face and the other removes one vertex, two edges, and
 one face. We apply these transformations while always keeping the requirement
 that the outer edges form a simple cycle. We will eventually end up with a
-triangle with three vertices, three edges and one face.
+triangle with three vertices, three edges and one face. This final shape
+clearly satisfies ${V - E + F = 1}$.  Adding the face we removed when producing
+the Schlegel-diagram gives us ${V - E + F = 2}$.
 
+\begin{thebibliography}{9}
+    \bibitem{proofs}
+        http://www.ics.uci.edu/~eppstein/junkyard/euler/all.html
+\end{thebibliography}
 \end{document}
