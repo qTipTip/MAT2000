@@ -13,6 +13,8 @@ Possible problem: "Removing singularities by a series of monoidal transforms"
 
 * Homogenous polynomials
 
+* Homogenous coordinates
+
 * Monoidal transformations
 
 ### Litterature
