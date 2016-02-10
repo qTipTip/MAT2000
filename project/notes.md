@@ -8,12 +8,13 @@ Possible problem: "Removing singularities by a series of monoidal transforms"
 
 * Algebraic surface
 
-* Projective space
-    + Charts
+* Projective Geometry
+    - Projective space
+        + Charts
 
-* Homogenous polynomials
+    - Homogenous polynomials
 
-* Homogenous coordinates
+    - Homogenous coordinates
 
 * Monoidal transformations
 
