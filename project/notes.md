@@ -22,6 +22,8 @@ Possible problem: "Removing singularities by a series of monoidal transforms"
 
 * "Undergraduate algebraic geometry" - Miles Reid
 
+* "Plane algebraic curves" - Keith Kendig
+
 ### Software
 
 * MayAvi + Python
