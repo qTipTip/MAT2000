@@ -20,6 +20,9 @@
 \usepackage[]{hyperref} 
 \usepackage[]{cleveref} 
 
+% image handling
+\usepackage[]{graphicx} 
+
 % proclamation definitions
 \theoremstyle{definition}
 \newtheorem{defn}{Definition}
@@ -41,12 +44,22 @@
 
 \begin{document}
 
+\begin{titlepage}
+
 \maketitle
 
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.8\linewidth]{../pictures/labs_septic.png}
+\end{figure}
+
+\end{titlepage}
 
 \begin{abstract}
     
 \end{abstract}
+
+\tableofcontents
 
 \section{Introduction}
 \label{sec:introduction}
@@ -58,8 +71,10 @@ We start our study of algebraic surfaces by looking at \emph{projective space}.
 Quite informally, projective space formalizes the notion of parallell lines
 intersecting at infinity. In order to get a better understanding of the general
 projective space $\proj^n$ we will first construct the \emph{real projective
-plane}\index{real projective plane} $\proj^2(\R)$. According to \cite{Wik16}
-there are three equivalent definitions:
+plane}\index{real projective plane} $\proj^2(\R)$. 
+
+\subsection{The real projective plane}
+According to \cite{Wik16} there are three equivalent definitions:
 
 \begin{enumerate}[I.]
     \item\label{def:one} The set of all lines in $\R^3$ passing through the origin $\left( 0,
@@ -104,7 +119,35 @@ with $\lambda = 1 / z$. If we consider definition \ref{def:two} from above,
 this corresponds to the set of points on the northern hemisphere of $S^2$, not
 including the circle of intersection in the $(x,y)$-plane. Similarly, we can
 look at the set of points $\projp{x}{y}{0}$. This corresponds, in $S^2$, to the
-circle of intersection in the $(x, y)$-plane.
+circle of intersection in the $(x, y)$-plane. 
+
+We can now take the notion of the projective plane and generalize to $n$
+dimensions.
+\subsection{Projective Space}
+\label{sub:projective_space}
+
+The general definition of projective $n$-space is completely anologous to the
+definition of the projective plane, the set of lines in $\R^{n+1}$ passing
+through the origin, however we include a formal definition for completeness.
+
+\begin{defn}[The real projective space of dimension $n$]\index{projective space}
+    Let $\sim$ be an equivalence relation on $\R^{n+1}\setminus \left\{ \left(
+    0, \ldots, 0 \right) \right\}$ defined by
+    \begin{equation}
+        \notag
+        \left( x_1, \ldots, x_{n+1} \right) \sim \left( x_1', \ldots, x_{n+1}' \right) 
+        \iff \left( x_1, \ldots, x_{n+1} \right) = \lambda \left( x_1', \ldots, x_{n+1}' \right)
+    \end{equation} 
+    where $\lambda$ is some positive real number. We then denote the
+    equivalence class of $\left( x_1, \ldots, x_{n+1} \right)$ by
+    $\projp{x_1}{\ldots}{x_{n+1}}$ and define \emph{the real projective space
+    of dimension $n$} as the set
+    \begin{equation}
+        \notag
+        \proj^n(\R) = \left\{ \projp{x_1}{\ldots}{x_{n+1}} \mid \left( x_1, \ldots, x_{n+1} \right) \in \R^{n+1} \setminus \left\{ \left( 0, \ldots, 0 \right) \right\} \right\}.
+    \end{equation}
+
+\end{defn}
 
 \section{Algebraic Surfaces}
 \label{sec:algebraic_surfaces}
