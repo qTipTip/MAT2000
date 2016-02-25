@@ -3,6 +3,8 @@
 \usepackage[]{enumerate} 
 \usepackage[]{pst-platon} 
 \usepackage[]{graphicx} 
+\usepackage[]{url} 
+\urlstyle{sf}
 
 \def\Gobble#1{}
 
@@ -41,13 +43,13 @@ seven bridges. This is where the famous question arises:
 \begin{quote}
     \emph{Can the seven bridges of the city of K{\"o}ningsberg, over the river
     Preger, all be traversed in a single trip without doubling back and have
-the trip end in the same place it began?}  
+    the trip end in the same place it began?}  
 \end{quote}
 
 Eminent mathematician Leonhard Euler proved that the problem stated above has
 no solution. In working with the solution to this problem however, he dabbled
 in a type of mathematics later to be known as \emph{graph theory}. One of the
-more remarkable results (in my humble opinion) to arise from this new field of
+more remarkable results (in my opinion) to arise from this new field of
 mathematics is the discovery of a relationship between the number of vertices,
 edges and faces in a polyhedron. It is exactly this relationship that Euler's
 polyhedron formula captures.
@@ -61,6 +63,14 @@ polyhedron formula captures.
     where $V$, $E$ and $F$ denote the number of vertices, edges and faces,
     respectively.
 \end{theorem}
+
+The reason I chose this specific theorem is because it was one of my first
+encounters with something resembling pure mathematics than the kind of
+mathematics I had been exposed to during elementary school. Having always been
+a fan of puzzles, I especially liked this result since it sprung from a
+seemingly ''innocent'' looking question that everyday people would walk around
+pondering.
+ 
 \section{Preliminaries}
 \label{sec:preliminaries}
 
@@ -117,7 +127,7 @@ Hence the quantity $V - E + F$ is unchanged.
 \begin{figure}[ht!]
     \centering
     \includegraphics{drawing.pdf}
-    \caption{First iterations of proof; using a cube.}
+    \caption{First iterations of proof; using a cube. Image retrieved from \cite{image}.}
     \label{fig:proof}
 \end{figure}
 
@@ -137,8 +147,24 @@ triangle with three vertices, three edges and one face. This final shape
 clearly satisfies ${V - E + F = 1}$.  Adding the face we removed when producing
 the Schlegel-diagram gives us ${V - E + F = 2}$.
 
-\begin{thebibliography}{9}
+\section{Applications}
+\label{sec:applications}
+
+Direct applications of the polyhedron formula can be hard to find. However, its
+generalizations to other mathematical fields as topology gives us an indication
+as to what kind of topological object we are working with. The \emph{euler
+characteristic}, denoted $\chi$, is a topological invariant. In this more
+general sense, our polyhedron formula reads $\chi = V - E + F$, where $\chi =
+2$. This characteristic can for instance be used to classifly the platonic
+solids. \cite{chi} presents a lot of mathematical results using the euler
+characteristic.
+
+\begin{thebibliography}{2}
     \bibitem{proofs}
-        http://www.ics.uci.edu/~eppstein/junkyard/euler/all.html
+        \url{http://www.ics.uci.edu/~eppstein/junkyard/euler/all.html}
+    \bibitem{image}
+        \url{https://en.wikipedia.org/wiki/Euler_characteristic#/media/File:V-E%2BF%3D2_Proof_Illustration.svg}
+    \bibitem{chi}
+        \url{https://en.wikipedia.org/wiki/Euler_characteristic}
 \end{thebibliography}
 \end{document}
