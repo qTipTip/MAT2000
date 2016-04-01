@@ -10,6 +10,8 @@
 
 % bibliography management
 \usepackage[backend=biber, style=alphabetic]{biblatex} 
+\usepackage[]{url} 
+\urlstyle{sf}
 \addbibresource{../bib/mat2000.bib}
 
 % index management
@@ -84,7 +86,7 @@ According to \cite{Wik16} there are three equivalent definitions:
     \item\label{def:two} The points on the sphere $S^2$, where every point $P$ and its
         antipodal points are not distinguished. For example, the point $(1, 0,
         0)$ is identified with the point $(-1, 0, 0)$.
-    \item The set of equivalence classes of $\R^3 \setminus \left\{(0, 0, 0)\right\}$ where
+    \item The set of equivalence classes of $\R^3 \setminus (0, 0, 0)$ where
         two points $P$ and $P^\prime$ are considered equivalent if and only if
         there is a positive $\lambda \in \R$ such that $P = \lambda P^\prime$.
 \end{enumerate}
@@ -96,7 +98,7 @@ $\proj^2(\R)$ as $\projp{x}{y}{z}$. These elements are commonly referred to as
 \emph{homogenous coordinates}\index{homogenous coordinates}. We state this
 formally in a definition.
 
-\begin{defn}[The real projective plane]
+\begin{defn}[The real projective plane]\index{$\proj^2(\R)$}
     Let $\sim$ be the equivalence relation on $\R^3$ defined by
     \begin{equation}
         \notag
@@ -108,7 +110,7 @@ formally in a definition.
     \begin{equation}
         \notag
         \proj^2(\R) = \left\{ \projp{x}{y}{z} \mid (x, y, z) \in \R^3 \setminus
-        \left\{ (0, 0, 0) \right\} \right\}.
+        (0, 0, 0) \right\}.
     \end{equation}
 \end{defn}
 
@@ -130,9 +132,11 @@ The general definition of projective $n$-space is completely anologous to the
 definition of the projective plane, the set of lines in $\R^{n+1}$ passing
 through the origin, however we include a formal definition for completeness.
 
-\begin{defn}[The real projective space of dimension $n$]\index{projective space}
-    Let $\sim$ be an equivalence relation on $\R^{n+1}\setminus \left\{ \left(
-    0, \ldots, 0 \right) \right\}$ defined by
+\begin{defn}[The real projective space of dimension $n$]\index{projective
+    space}\index{$\proj^n(\R)$}
+
+    Let $\sim$ be an equivalence relation on $\R^{n+1}\setminus \left( 0,
+    \ldots, 0 \right)$ defined by
     \begin{equation}
         \notag
         \left( x_1, \ldots, x_{n+1} \right) \sim \left( x_1', \ldots, x_{n+1}' \right) 
@@ -144,13 +148,16 @@ through the origin, however we include a formal definition for completeness.
     of dimension $n$} as the set
     \begin{equation}
         \notag
-        \proj^n(\R) = \left\{ \projp{x_1}{\ldots}{x_{n+1}} \mid \left( x_1, \ldots, x_{n+1} \right) \in \R^{n+1} \setminus \left\{ \left( 0, \ldots, 0 \right) \right\} \right\}.
+        \proj^n(\R) = \left\{ \projp{x_1}{\ldots}{x_{n+1}} \mid \left( x_1, \ldots, x_{n+1} \right) 
+        \in \R^{n+1} \setminus \left( 0, \ldots, 0 \right) \right\}.
     \end{equation}
-
 \end{defn}
 
 \section{Algebraic Surfaces}
 \label{sec:algebraic_surfaces}
+
+Algebraic surfaces will be the central object of study in this project. We
+follow the definition of \cite{cite}.
 
 \printindex
 \printbibliography

@@ -1,8 +1,9 @@
-def quadratic_transform(expr, iterations=1, x='(y*z)', y='(x*z)', z='(x*y)'):
+def birational_transform(expr, iterations=1, x='(y*z)', y='(x*z)', z='(x*y)'):
     """
     Maps (x, y, z) to (yz, xz, xy)
     Optional argument, number of iterations of map
     """
+
     if iterations == 0:
         return expr
 
