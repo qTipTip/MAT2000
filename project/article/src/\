@@ -5,7 +5,6 @@
 \usepackage[]{amsthm} 
 \usepackage[]{amssymb} 
 
-\usepackage[]{paralist} 
 \usepackage[]{mathpazo} 
 \usepackage[]{palatino} 
 
@@ -22,12 +21,12 @@
 \usepackage[]{makeidx} 
 \makeindex
 
-% image handling
-\usepackage[]{graphicx} 
-
 % cross-references
 \usepackage[]{hyperref} 
 \usepackage[]{cleveref} 
+
+% image handling
+\usepackage[]{graphicx} 
 
 % proclamation definitions
 \theoremstyle{definition}
@@ -100,17 +99,6 @@ example.
     the algebraic variety associated to $S$ will be the roots of unity on the
     circle in the complex plane.
 \end{exm}
-An algebraic variety of \emph{dimension two}\index{algebraic variety!dimension}
-is what we call an \emph{algebraic surface}\index{algebraic
-surface}\footnote{Figuring out the dimension of a variety is a bit tricky,
-related to chains of ideals it seems.}. Since algebraic surfaces are
-polynomials, it is reasonable to talk about the \emph{degree} of the algebraic
-surface. We let $d = \max(i + j + k)$ be the maximum sum of all powers of all
-terms $a_mx^{i_m}y^{j_m}z^{k_m}$.
-
-\begin{exm}[The degree of a surface]
-    
-\end{exm}
 
 One of the distinguishing features between a \emph{manifold} and an algebraic
 variety is that the algebraic varieties may exhibit singularities. This is one
@@ -132,31 +120,12 @@ define this formally:
 
 Again, we can give a few examples. 
 \begin{exm}
-    Let our surface of degree $2$ be defined by $f(x, y, z) = ax^2 + by^2 + cz^2$. We
-    first take the look at the partial derivatives. These are given by
+    Let our surface of degree $2$ be defined by $f(x) = ax^2 + by^2 + cz^2 + d
+    = 0$. We first take the look at the partial derivatives. These are given by
     \begin{align*}
         \party{f}{x} = 2ax = 0, && \party{f}{y} = 2by = 0, && \party{f}{z} = 2cz = 0.
     \end{align*}
-    Solving these for $x, y, z$ yield $x = y = z = 0$. We want $f$ to vanish
-    identically on the point $(0, 0, 0)$, so setting $f(x, y, z) = 0$ tells us
-    that our surface $f$ exhibit a singularity at the point $(0, 0, 0)$. The
-    surface, with its singularity, is shown in \cref{fig:double_cone}.
 \end{exm}
-\begin{figure}[]
-    \centering
-    \includegraphics[width=0.4\linewidth]{../pictures/double_cone}
-    \caption{A double cone given by the equation $f(x, y, z) = ax^2 + bx^2 + cz^2$.}
-    \label{fig:double_cone}
-\end{figure}
-Now, it is interesting to ask whether there are different types of
-singularities, or are all singularities of the same nature?  It turns out that
-there are several different kinds of singularities, namely;
-\begin{inparaenum}[(a)]
-\item isolated singularities\index{singularity!isolated},
-\item double points\index{singularity!double point}.
-\end{inparaenum}
-We will later learn how to characterize these singularities, but for now we
-will just look at them as singularities. 
 
 \appendix
 \section{Visualization Techniques}
