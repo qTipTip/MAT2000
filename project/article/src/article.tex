@@ -1,168 +1,122 @@
-\documentclass{article}
+\documentclass[a4paper]{article}
 
-% mathematical typesetting
 \usepackage[]{amsmath} 
 \usepackage[]{amsthm} 
 \usepackage[]{amssymb} 
 
-\usepackage[]{paralist} 
-\usepackage[]{mathpazo} 
-\usepackage[]{palatino} 
+\usepackage[demo]{graphicx} 
+\usepackage[]{caption} 
+\usepackage[]{subcaption} 
 
-% lists
-\usepackage[]{enumerate} 
-
-% bibliography management
-\usepackage[backend=biber, style=alphabetic]{biblatex} 
-\usepackage[]{url} 
-\urlstyle{sf}
-\addbibresource{../bib/mat2000.bib}
-
-% index management
-\usepackage[]{makeidx} 
-\makeindex
-
-% image handling
-\usepackage[]{graphicx} 
-
-% cross-references
-\usepackage[]{hyperref} 
 \usepackage[]{cleveref} 
 
-% proclamation definitions
-\theoremstyle{definition}
-\newtheorem{defn}{Definition}
-\newtheorem{exm}{Example}
-\theoremstyle{plain}
-\newtheorem{thm}{Theorem}
-\newtheorem{lma}{Lemma}
-\newtheorem{crl}{Corollary}
-\newtheorem{prp}{Proposition}
-
-
-% auxilliary commands
-\newcommand{\party}[2]{\ensuremath{\frac{\partial #1}{\partial #2}}}
-\newcommand{\proj}{\ensuremath{\mathbb{P}}} % projective space
-\newcommand{\R}{\ensuremath{\mathbb{R}}}    % the real numbers
-\newcommand{\N}{\ensuremath{\mathbb{N}}}    % the positive integers
-\renewcommand{\C}{\ensuremath{\mathbb{C}}}    % the complex numbers
-\newcommand{\Z}{\ensuremath{\mathbb{Z}}}    % the integers numbers
-\newcommand{\projp}[3]{\ensuremath{[ #1 : #2 : #3 ]}}
+\newcommand{\C}{\ensuremath{\mathbb{C}}}
 
 \title{Visualizing Algebraic Surfaces}
 \author{Ivar Haugal{\o}kken Stangeby}
+\date{\today}
 
 \begin{document}
-
-\begin{titlepage}
-
-\maketitle
-
-\begin{figure}[h!]
-    \centering
-    \includegraphics[width=0.8\linewidth]{../pictures/labs_septic.png}
-\end{figure}
-
-\end{titlepage}
-
-\begin{abstract}
-    One of the most common ways people are exposed to mathematics are through
-    the visually pleasing mathematical objects.  The aim of this article is to
-    use algebraic surfaces to highlight interesting areas of mathematics, and
-    hopefully provide a way people easily can dive in and visualize these
-    themselves. We take a look at the mathematical definition of algebraic
-    surfaces. We then consider their singularities, how to remove their
-    singularities, and the symmetries of such singularities. 
-\end{abstract}
-\tableofcontents
-
-\section{Algebraic Surfaces}
-\label{sec:algebraic_surfaces}
-
-In order to understand mathematically what kind of object we are dealing with,
-namely the algebraic surfaces, we must first introduce some preliminaries.
-Starting with the notion of an \emph{algebraic variety\index{algebraic
-variety}}.
-\begin{defn}[Affine Algebraic Variety]
-    Given a ring of polynomials in $n$ variables $k \left[ x_1, \ldots, x_n
-    \right]$ where $k$ is an algebraically closed field, let $S \subset k
-    \left[ x_1, \ldots, x_n \right]$ be a set of polynomials. We define the
-    \emph{affine algebraic variety associated to $S$} as the set of solutions
-        \begin{equation}
-            \notag
-            V(S) = \left\{x \in k^n \mid f(x) = 0 \text{ for all } f \in S \right\}.
-        \end{equation}
-\end{defn}
-This definition might seem a bit cryptic, but we can give a fairly intuitive
-example.
-\begin{exm}[Roots of unity]
-    Let $k = \C$ and $S = \left\{ f_n(z) = z^n + 1 \mid n \in \N \right\}$ then
-    the algebraic variety associated to $S$ will be the roots of unity on the
-    circle in the complex plane.
-\end{exm}
-An algebraic variety of \emph{dimension two}\index{algebraic variety!dimension}
-is what we call an \emph{algebraic surface}\index{algebraic
-surface}\footnote{Figuring out the dimension of a variety is a bit tricky,
-related to chains of ideals it seems.}. Since algebraic surfaces are
-polynomials, it is reasonable to talk about the \emph{degree} of the algebraic
-surface. We let $d = \max(i + j + k)$ be the maximum sum of all powers of all
-terms $a_mx^{i_m}y^{j_m}z^{k_m}$.
-
-\begin{exm}[The degree of a surface]
     
-\end{exm}
+    \maketitle
+    \tableofcontents
 
-One of the distinguishing features between a \emph{manifold} and an algebraic
-variety is that the algebraic varieties may exhibit singularities. This is one
-of the more aesthetically pleasing properties of algebraic surfaces, hence
-something we are very much interested in. A singularity is strictly speaking a
-point where the surface and the partial derivatives vanish identically. We
-define this formally:
+    \section{An Informal Introduction}
+    \label{sec:an_informal_introduction}
+    
+    In this section we briefly look at the natural construction of the
+    mathematical objects we are interested in studying in the rest of this
+    paper.
 
-\begin{defn}[Point of Singularity \protect{\cite{OLabs2}} \index{singularity}]
-    A point $p$ in $\C^n$ is called a \emph{singular point} or
-    \emph{singularity of the hypersurface} $f \in \C \left[ x_1, \ldots, x_n
-    \right]$ if $f(p) = 0$ and all the partial derivatives are zero.
-    Mathematically:
+    \subsection{Real Algebraic Curves}
+    \label{sub:real_algebraic_curves}
+    
+    From elementary mathematics one learns about real valued functions, $f(x)$,
+    and how to graph these functions by setting $y = f(x)$ and plotting points
+    in the $(x, y)$-plane. Now, the \emph{graph of a function} is something of
+    a peculiarity, because it comes with some restrictions. Not all curves in
+    the $(x, y)$-plane correspond to functions. The method for verifying
+    whether a certain ''graph'' corresponds to a function or not typically
+    taught in school is the \emph{vertical line test}. 
+
+    Having an equation $y = f(x)$ we can form what we call the \emph{equation
+    of a curve at zero}. We define a new function in two variables
     \begin{equation}
-        \notag
-        \party{{}}{x_i}f(p) = 0 \quad \text{ for all } \quad i = 1, \ldots, n.
+        \label{eq:equation_at_zero}
+        g(x, y) = y - f(x) = 0.
     \end{equation}
-\end{defn}
+    If the function $f(x)$ is a polynomial in the variable $x$ with certain
+    coefficients we call the function graph of $f(x)$ \emph{algebraic}.
 
-Again, we can give a few examples. 
-\begin{exm}
-    Let our surface of degree $2$ be defined by $f(x, y, z) = ax^2 + by^2 + cz^2$. We
-    first take the look at the partial derivatives. These are given by
-    \begin{align*}
-        \party{f}{x} = 2ax = 0, && \party{f}{y} = 2by = 0, && \party{f}{z} = 2cz = 0.
-    \end{align*}
-    Solving these for $x, y, z$ yield $x = y = z = 0$. We want $f$ to vanish
-    identically on the point $(0, 0, 0)$, so setting $f(x, y, z) = 0$ tells us
-    that our surface $f$ exhibit a singularity at the point $(0, 0, 0)$. The
-    surface, with its singularity, is shown in \cref{fig:double_cone}.
-\end{exm}
-\begin{figure}[]
-    \centering
-    \includegraphics[width=0.4\linewidth]{../pictures/double_cone}
-    \caption{A double cone given by the equation $f(x, y, z) = ax^2 + bx^2 + cz^2$.}
-    \label{fig:double_cone}
-\end{figure}
-Now, it is interesting to ask whether there are different types of
-singularities, or are all singularities of the same nature?  It turns out that
-there are several different kinds of singularities, namely;
-\begin{inparaenum}[(a)]
-\item isolated singularities\index{singularity!isolated},
-\item double points\index{singularity!double point}.
-\end{inparaenum}
-We will later learn how to characterize these singularities, but for now we
-will just look at them as singularities. 
+    Generally speaking, we call a curve defined by \cref{eq:equation_at_zero}
+    an \emph{algebraic curve} if the function $g(x, y)$ is a polynomial in two
+    variables, $x$ and $y$. Mathematically, this can be expressed as
+    \begin{equation}
+        \label{eq:algebraic_curve}
+        g(x, y) = \sum^{}_{i, j} a_{i_j}x^{i}y^{i}.
+    \end{equation}
+    
+    However, if this distinction between a graph and a curve is to be justified
+    there has to be some curves that are not graphs. One of the first examples
+    one encounter of a curve not corresponding to a function is what you get
+    when you set $y^2 = x^3$. This curve does not pass the vertical-line-test
+    and is therefore something different from a graph. Similarly, the equation
+    $y^2 = x^3 - x^2$ defines a curve that again is not a graph. These are
+    shown in \cref{fig:curves_not_graphs}. These curves exhibit \emph{singular
+    points} at $(0, 0)$. 
+    
+    \begin{figure}[h]
+        \centering
+        \begin{subfigure}{0.5\textwidth}
+            \centering
+            \includegraphics[width=0.35\linewidth]{foo}
+            \caption{$g(x, y) = y^2 - x^3 = 0$}
+        \end{subfigure}%
+        \begin{subfigure}{0.5\textwidth}
+            \centering
+            \includegraphics[width=0.35\linewidth]{bar}
+            \caption{$g(x, y) = y^2 - x^3 + x^2 = 0$}
+        \end{subfigure} 
+        \caption{Examples of curves that are \emph{not} graphs given by their
+        functions $g(x, y)$}.}
+        \label{fig:curves_not_graphs}
+    \end{figure}
+    
+    With what we have so far, we can move up a dimension. Instead of
+    considering curves in the $(x, y)$-plane we can look at surfaces in the
+    $(x, y, z)$-space. We, as we did with $g(x, y)$ above, define a function
+    $h(x, y, z) = z - g(x, y)$. The surfaces are given by equations on the form
+    $h(x, y, z) = 0$. These surfaces are called algebraic if $h(x, y, z)$ is a
+    polynomial in the variables $x, y, z$. Again, mathematically, this is
+    expressed as
+    \begin{equation}
+        \label{eq:algebraic_surfaces}
+        h(x, y, z) = \sum^{}_{i, j, k} a_{ijk}x^iy^jz^k.
+    \end{equation}
 
-\appendix
-\section{Visualization Techniques}
-\label{sec:visualization_techniques}
+    \subsection{Going Complex}
+    \label{sub:going_complex}
+    
+    The surfaces considered so far are over the real numbers, i.e, the
+    coefficients $a_{ijk}$ are real numbers. We can instead work over the
+    complex numbers where the surfaces are given by an equivalent equation, but
+    where the coefficients now are complex numbers\footnote{We will come back
+    to why we make this transition when we talk about sets being algebraically
+    closed or not.}:
+    \begin{equation}
+        \left\{ (x, y, z) \in \C \mid h(x, y, z) = 0 \right\}.
+    \end{equation}
+    Again, doing the same trick (one-trick ponies) we can now define $w = h(x,
+    y, z)$ and look at the equations $w - h(x, y, z) = 0$. Now, we are stuck
+    with an equation in four variables. With only three degrees of freedom to
+    work with when visualizing these objects we encounter an obstacle. How do
+    we know what these surfaces look like? This brings us to the world of
+    \emph{projective geometry}.
 
-\printindex
-\printbibliography
+    \section{Projective Geometry}
+    \label{sec:projective_geometry}
+    
+        
+
 
 \end{document}
