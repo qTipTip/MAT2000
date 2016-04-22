@@ -6,8 +6,11 @@
 
 \usepackage[backend=biber, style=alphabetic]{biblatex} 
 \addbibresource{../bib/mat2000.bib}
+\usepackage[]{url} 
+\urlstyle{sf}
 
-\usepackage[demo]{graphicx} 
+\usepackage[]{graphicx} 
+\usepackage[]{wrapfig} 
 \usepackage[]{caption} 
 \usepackage[]{subcaption} 
 
@@ -17,17 +20,30 @@
 
 \theoremstyle{definition}
 \newtheorem{defn}{Definition}
+\newtheorem{exmpl}{Example}
+
+\theoremstyle{plain}
+\newtheorem{lma}{Lemma}
+\newtheorem{crl}{Corollary}
 
 \newcommand{\C}{\ensuremath{\mathbb{C}}}
 \newcommand{\proj}{\ensuremath{\mathbb{P}}}
+\renewcommand{\hom}{\ensuremath{h_{\mathrm{hom}}}}
 
 \title{Visualizing Algebraic Surfaces}
 \author{Ivar Haugal{\o}kken Stangeby}
 \date{\today}
 
 \begin{document}
-    
+
+    \begin{titlepage}
     \maketitle
+
+    \begin{figure}[htb]
+        \centering
+        \includegraphics[width=0.8\linewidth]{../pictures/labs_septic.png}
+    \end{figure}
+    \end{titlepage}
     \tableofcontents
 
     \section{An Informal Introduction}
@@ -78,12 +94,12 @@
         \centering
         \begin{subfigure}{0.5\textwidth}
             \centering
-            \includegraphics[width=0.35\linewidth]{foo}
+            \includegraphics[width=1.0\linewidth]{../pictures/cusp.pdf}
             \caption{$g(x, y) = y^2 - x^3 = 0$}
         \end{subfigure}%
         \begin{subfigure}{0.5\textwidth}
             \centering
-            \includegraphics[width=0.35\linewidth]{bar}
+            \includegraphics[width=1.0\linewidth]{../pictures/double_point.pdf}
             \caption{$g(x, y) = y^2 - x^3 + x^2 = 0$}
         \end{subfigure} 
         \caption{Examples of curves that are \emph{not} graphs given by their
@@ -116,18 +132,19 @@
         \left\{ (x, y, z) \in \C \mid h(x, y, z) = 0 \right\}.
     \end{equation}
     Again, doing the same trick (one-trick ponies) we can now define $w = h(x,
-    y, z)$ and look at the equations $w - h(x, y, z) = 0$. Now, we are stuck
-    with an equation in four variables. With only three degrees of freedom to
-    work with when visualizing these objects we encounter an obstacle. How do
-    we know what these surfaces look like? This brings us to the world of
-    \emph{projective geometry}.
+    y, z)$ and look at the equations $w - h(x, y, z) = 0$ in the $(x, y, z,
+    w)$-space. Now, we are stuck with an equation in four variables. With only
+    three degrees of freedom to work with when visualizing these objects we
+    encounter an obstacle. How do we know what these surfaces look like? This
+    brings us to the world of \emph{projective geometry}.
 
     \section{Projective Geometry}
     \label{sec:projective_geometry}
     
-    The way we visualize these surfaces in four variables is by \emph{fixing}
-    one of the variables. This is called \emph{homogenizing} the polynomial
-    $h(x, y, z)$. We first want to introduce some definitions.
+    The way we work these surfaces in four variables is by introducing a new
+    variable making the polynomial terms all have the same degree.  This is
+    called \emph{homogenizing} the polynomial $h(x, y, z)$. We first want to
+    introduce some definitions.
 
     Quite informally, projective space formalizes the notion of parallell lines
     intersecting at infinity. In order to get a better understanding of the
@@ -204,7 +221,7 @@
         \begin{equation}
             \notag
             \left( x_1, \ldots, x_{n+1} \right) \sim \left( x_1', \ldots,
-            \x_{n+1}' \right) \iff \left( x_1', \ldots, x_{n+1}' \right) =
+            x_{n+1}' \right) \iff \left( x_1', \ldots, x_{n+1}' \right) =
             \lambda \left( x_1, \ldots, x_{n+1} \right)
         \end{equation}
         where $\lambda$ is some non-zero complex number. We then denote the
@@ -218,7 +235,133 @@
             0 \right\} \right\}.
         \end{equation}
     \end{defn}
+    
+    \section{Algebraic Surfaces}
+    \label{sec:algebraic_surfaces}
+    
+    We are now equipped with what we need to again look at our algebraic
+    surfaces defined by $h(x, y, z) = 0$. The solutions to this equation are
+    points in $\C^4$. We homogenize this polynomial by introducing the variable
+    $w$ and evaluating $h$ at the points $x \to x/w$, $y \to y/w$ and $z \to
+    z/w$ and then multiply by $w^d$ where $d$ is the degree of the polynomial
+    $h(x, y, z)$. 
 
+    \begin{defn}[Homogenized polynomial]
+        Let $h(x, y, z)$ be a polynomial in $x, y, z$ of degree $d$. 
+        The homogenized polynomial $\hom(w, x, y, z)$ is given by
+        \begin{equation}
+            \notag
+            \hom(w, x, y, z) = w^d h \left( \tfrac{x}{w}, \tfrac{y}{w}, \tfrac{z}{w} \right).
+        \end{equation}
+        It follows that each non-zero term in this polynomial has the same
+        degree.
+    \end{defn}
+    The property that each non-zero term has the same degree in a homogeneous
+    polynomial gives rise to a very important property which relates directly
+    to the projective geometry introduced above.\footnote{This following
+    property can be seen directly by visualizing the homogenous polynomial
+    formed by a polynomial $g(x, y)$ and noticing that the figure does not
+    change when zooming in or out.}
+    
+    \begin{crl}
+        If $\hom$ is an homogeneous polynomial formed by homogenizing the
+        polynomial $h(x, y, z)$ of degree $d$, then
+        \begin{equation}
+            \notag
+            \hom(\lambda w, \lambda x, \lambda y, \lambda z) = \lambda^d \hom(w, x, y, z).
+        \end{equation}
+    \end{crl}
+    \begin{proof}
+        We simply compute the left hand side:
+        \begin{align*}
+            \notag
+            \hom(\lambda w, \lambda x, \lambda y, \lambda z) &= (\lambda w)^d h
+            \left( \tfrac{\lambda x}{\lambda w}, \tfrac{\lambda x}{\lambda w},
+            \tfrac{\lambda x}{\lambda w}\right) \\ &= \lambda^d \hom(w, x, y,
+            z).
+        \end{align*}
+    \end{proof}
+    Since we are working with homogenous coordinates, the condition $\hom(w, x,
+    y, z) = 0$ is well defined on the equivalence class discussed above,
+    strictly due to this first corollary.
+   
+    Now, if we can homogenize a polynomial, we can certainly dehomogenize it.
+    Given a homogeneous polynomial $\hom(w, x, y, z)$ we can dehomogenize the
+    polynomial by \emph{fixing} one of the variables.
+
+    \subsection{Initial examples of algebraic surfaces}
+    \label{sub:initial_examples_of_algebraic_surfaces}
+    
+    Although mentioned before, we repeat the definition of an algebraic surface.
+    \begin{defn}[Algebraic surface]
+        A surface given by the equation $h(x, y, z) = 0$ is called \emph{algebraic}
+        if $h(x, y, z)$ is a polynomial in the variables $x, y, z$.
+        Mathematically,
+        \begin{equation}
+            \notag
+            h(x, y, z) = \sum^{}_{i, j, k} a_{ijk}x^iy^jz^k.
+        \end{equation}
+    \end{defn}     
+
+    We are also interested in classifying the surfaces according to their
+    \emph{degree}. 
+    \begin{defn}[The degree of a surface]
+        Given a surface defined by the equation $h(x, y, z) = 0$ we define the
+        \emph{degree}, denoted $d$, of the surface to be the largest sum of
+        powers in the terms of the polynomial. Mathematically,
+        \begin{equation}
+            \notag
+            d = \max\{i + j + k\}
+        \end{equation}
+        where $i, j, k$ are the powers of $x, y$ and $z$ in the terms.
+    \end{defn}
+    Now, what do these surfaces actually look like? We give some examples that
+    is going to illustrate the above definition.
+    
+    \begin{exmpl}
+        Let $h$ be a polynomial in $x, y, z$ given by
+        \begin{equation}
+            \notag h(x, y, z) = x^2 + y^2 - z^2. 
+        \end{equation}
+        We then look at the set of solutions to the equation $h(x, y, z) = 0$.
+        Plotting these yields a double-cone shaped figure. We see there is an
+        interesting quirk at the point $(0, 0, 0)$ where the surface seems to
+        pass through itself, formally we say that the surface exhibits a
+        \emph{singularity} at the point $(0, 0, 0)$, but we will come back to
+        that later.
+        \begin{figure}[h!]
+            \centering
+            \includegraphics[width=0.3\linewidth]{../pictures/double_cone.png}
+            \caption{The equation $h(x, y, z) = x^2 + y^2 - z^2 = 0$ gives rise
+            to a double-cone shaped algebraic surface.}
+            \label{fig:../pictures/double_cone}
+        \end{figure}
+        This surface has degree $d = 2$, and since all the terms have the same
+        degree the defining polynomial is homogenous, and hence the surface is
+        invariant under scaling.  
+    \end{exmpl} 
+    
+    While there is a lot of fun to be had with algebraic surfaces of degree $2$
+    there is a limit as to how exciting they are. Things get much more fun when
+    we look at surfaces of higher degree. Consider for example the following
+    surface of degree $3$.
+
+    \begin{exmpl}[The ding-dong cubic]
+        Let $h(x, y, z) = x^2 + y^2 - (1 - z)z^2$. Then the equation $h(x, y,
+        z) = 0$ defines a surface of degree $d = 3$ (attributed to the
+        $(1-z)z^2$ term). 
+        \begin{figure}[h!]
+            \centering
+            \includegraphics[width=0.3\linewidth]{../pictures/ding_dong.png}
+            \caption{The ding-dong cubic given by the equation $h(x, y, z) =
+            x^2 + y^2 - (1-z)z^2 = 0$.}
+            \label{fig:../pictures/ding_dong}
+        \end{figure}
+        This surface also exhibits a singularity at the point $(0, 0, 0)$ where
+        it passes through itself.
+    \end{exmpl}
+    
+    Another very interesting  
+\clearpage
 \printbibliography
-
 \end{document}
