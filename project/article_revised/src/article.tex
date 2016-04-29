@@ -337,7 +337,8 @@ In order to aid us with this, we have the following result:
         \end{bmatrix}
     \end{equation}
     has rank less than or equal to one. Similarly, the rank is less than or
-    equal to one only if each $2\times2$-minor $x_iy_j - x_jy_i = 0$.\footnote{Figure this out properly.}
+    equal to one only if each $2\times2$-minor $x_iy_j - x_jy_i =
+    0$.\footnote{Figure this out properly.}
 \end{corollary}
 \begin{proof}
     In order to verify this, we recall that $\rank(A) = \rank(A^T)$, so we
@@ -392,6 +393,28 @@ In order to aid us with this, we have the following result:
             x^2s^2 - x^2 - x^3 = x^2(s^2 - 1 - x)$ which can be visualized in
             the $(x, s)$-plane.
     \end{description}
+    \begin{figure}[h!]
+        \centering
+        \begin{subfigure}[t]{0.3\textwidth}
+            \includegraphics[width=\textwidth]{../pictures/case_1.pdf} 
+            \caption{The function $g$ visualized in the $(y, r)$-plane.}
+        \end{subfigure}
+        ~
+        \begin{subfigure}[t]{0.3\textwidth}
+            \includegraphics[width=\textwidth]{../pictures/case_2.pdf} 
+            \caption{The function $h$ visualized in the $(x, s)$-plane.}
+        \end{subfigure}
+        \caption{The affine charts of the blow-up. Note that each of the curves
+        intersect the line vertical axis twice. This corresponds to the two
+        singularities of the original curve.}
+    \end{figure}
 \end{example}
+
+\appendix
+
+\section{Code Samples}
+\label{sec:code_samples}
+
+
 
 \end{document}
