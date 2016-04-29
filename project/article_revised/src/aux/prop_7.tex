@@ -1,0 +1,39 @@
+\documentclass{amsart}
+
+\begin{document}
+    Let $(x_1, \ldots, x_n)$ be a multiple of $(y_1, \ldots, y_n)$.  We can
+    then write the matrix
+    \begin{equation}
+        \notag
+        \begin{bmatrix}
+            x_1 && \hdots && x_n \\
+            y_1 && \hdots && y_n
+        \end{bmatrix} = 
+        \begin{bmatrix}
+            x_1 && \hdots && x_n \\
+            \lambda x_1 && \hdots && \lambda x_n \\
+        \end{bmatrix}
+    \end{equation}
+    for some scalar $\lambda$. However, we can now subtract a multiple
+    $\lambda$ of the first row from the second row and achieve
+    \begin{equation}
+        \notag
+        \begin{bmatrix}
+            x_1 && \hdots && x_n \\
+            0 && \hdots && 0
+        \end{bmatrix}.
+    \end{equation} If we now let $x_i$ be the smallest non-zero component for
+    $1 \leq i \leq n$ and divide the first row by $x_i$ we achieve the
+    following matrix
+    \begin{equation}
+        \notag
+        \begin{bmatrix}
+            0 && \hdots && 1 && \frac{x_i+1}{x_i} && \hdots && \frac{x_n}{x_i} \\
+            0 && \hdots && 0 && 0 && \hdots && 0
+        \end{bmatrix}.
+    \end{equation}
+    This matrix has exactly one pivot-column if there is at least one $i$ for
+    which $x_i \neq 0$ and exactly zero pivot columns if $x_i = 0$ for all $i$.
+    Consequently, the rank of this matrix is either 1 or 0, and more
+    specifically, less than or equal to 1.
+\end{document}

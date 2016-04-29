@@ -27,7 +27,9 @@
 \newtheorem{crl}{Corollary}
 
 \newcommand{\C}{\ensuremath{\mathbb{C}}}
+\newcommand{\V}{\ensuremath{\mathbb{V}}}
 \newcommand{\proj}{\ensuremath{\mathbb{P}}}
+\renewcommand{\A}{\ensuremath{\mathbb{A}}}
 \renewcommand{\hom}{\ensuremath{h_{\mathrm{hom}}}}
 
 \title{Visualizing Algebraic Surfaces}
@@ -90,7 +92,7 @@
     shown in \cref{fig:curves_not_graphs}. These curves exhibit \emph{singular
     points} at $(0, 0)$. 
     
-    \begin{figure}[h]
+    \begin{figure}[]
         \centering
         \begin{subfigure}{0.5\textwidth}
             \centering
@@ -122,7 +124,7 @@
     \subsection{Going Complex}
     \label{sub:going_complex}
 
-    The surfaces considered so far are over the real numbers, i.e, the
+    The surfaces considered so far are over the real numbers, i.e., the
     coefficients $a_{ijk}$ are real numbers. We can instead work over the
     complex numbers where the surfaces are given by an equivalent equation, but
     where the coefficients now are complex numbers\footnote{We will come back
@@ -146,7 +148,7 @@
     called \emph{homogenizing} the polynomial $h(x, y, z)$. We first want to
     introduce some definitions.
 
-    Quite informally, projective space formalizes the notion of parallell lines
+    Quite informally, projective space formalizes the notion of parallel lines
     intersecting at infinity. In order to get a better understanding of the
     general projective space $\proj^n$ we will first construct the
     \emph{projective plane} $\proj^2(\C)$.
@@ -201,7 +203,7 @@
     consider definition \cref{item:sphere} from above, this corresponds to the
     set of points on the northern hemisphere of $S^2$ not including the circle
     of intersection in the $(x, y)$-plane. Similarly, we can look at the set of
-    points $\left[ x : y : 0 \right]$. This correponds, in $S^2$, to the circle
+    points $\left[ x : y : 0 \right]$. This corresponds, in $S^2$, to the circle
     of intersection in the $(x, y)$-plane.
 
     We can now take the notion of the
@@ -210,7 +212,7 @@
     \subsection{Projective Space}
     \label{sub:projective_space}
     
-    The general definition of projective $n$-space is completely anologous to
+    The general definition of projective $n$-space is completely analogous to
     the definition of the projective plane, the set of lines in $\C^{n+1}$
     passing through the origin, however we include a formal definition for
     completeness.
@@ -259,7 +261,7 @@
     The property that each non-zero term has the same degree in a homogeneous
     polynomial gives rise to a very important property which relates directly
     to the projective geometry introduced above.\footnote{This following
-    property can be seen directly by visualizing the homogenous polynomial
+    property can be seen directly by visualizing the homogeneous polynomial
     formed by a polynomial $g(x, y)$ and noticing that the figure does not
     change when zooming in or out.}
     
@@ -281,13 +283,15 @@
             z).
         \end{align*}
     \end{proof}
-    Since we are working with homogenous coordinates, the condition $\hom(w, x,
+    Since we are working with homogeneous coordinates, the condition $\hom(w, x,
     y, z) = 0$ is well defined on the equivalence class discussed above,
     strictly due to this first corollary.
    
     Now, if we can homogenize a polynomial, we can certainly dehomogenize it.
     Given a homogeneous polynomial $\hom(w, x, y, z)$ we can dehomogenize the
-    polynomial by \emph{fixing} one of the variables.
+    polynomial by \emph{fixing} one of the variables. By setting $w = f(x, y,
+    z)$ in the polynomial $\hom(w, x, y, z)$ we get a new polynomial $h(x,
+    y, z)$ which is not necessarily homogeneous. 
 
     \subsection{Initial examples of algebraic surfaces}
     \label{sub:initial_examples_of_algebraic_surfaces}
@@ -316,7 +320,7 @@
         where $i, j, k$ are the powers of $x, y$ and $z$ in the terms.
     \end{defn}
     Now, what do these surfaces actually look like? We give some examples that
-    is going to illustrate the above definition.
+    hopefully is going to illustrate the above definition.
     
     \begin{exmpl}
         Let $h$ be a polynomial in $x, y, z$ given by
@@ -329,7 +333,7 @@
         pass through itself, formally we say that the surface exhibits a
         \emph{singularity} at the point $(0, 0, 0)$, but we will come back to
         that later.
-        \begin{figure}[h!]
+        \begin{figure}[]
             \centering
             \includegraphics[width=0.3\linewidth]{../pictures/double_cone.png}
             \caption{The equation $h(x, y, z) = x^2 + y^2 - z^2 = 0$ gives rise
@@ -337,7 +341,7 @@
             \label{fig:../pictures/double_cone}
         \end{figure}
         This surface has degree $d = 2$, and since all the terms have the same
-        degree the defining polynomial is homogenous, and hence the surface is
+        degree the defining polynomial is homogeneous, and hence the surface is
         invariant under scaling.  
     \end{exmpl} 
     
@@ -350,18 +354,104 @@
         Let $h(x, y, z) = x^2 + y^2 - (1 - z)z^2$. Then the equation $h(x, y,
         z) = 0$ defines a surface of degree $d = 3$ (attributed to the
         $(1-z)z^2$ term). 
-        \begin{figure}[h!]
+        \begin{figure}[]
             \centering
-            \includegraphics[width=0.3\linewidth]{../pictures/ding_dong.png}
+            \includegraphics[width=0.2\linewidth]{../pictures/ding_dong.png}
             \caption{The ding-dong cubic given by the equation $h(x, y, z) =
             x^2 + y^2 - (1-z)z^2 = 0$.}
             \label{fig:../pictures/ding_dong}
         \end{figure}
         This surface also exhibits a singularity at the point $(0, 0, 0)$ where
         it passes through itself.
-    \end{exmpl}
+        \end{exmpl}
     
-    Another very interesting  
-\clearpage
-\printbibliography
+    Another very interesting third-degree surface, or \emph{cubic}, is the
+    Cayley cubic. 
+    \begin{exmpl}
+        This is given by the homogeneous equation
+        \begin{equation}
+            \notag
+            \hom(w, x, y, z) = \frac{1}{w} + \frac{1}{x} + \frac{1}{y} + \frac{1}{z} = 0.
+        \end{equation}
+        In order to visualize this, we dehomogenize the polynomial by
+        multiplying through by the common denominator and setting $w = f(x, y,
+        z)$ for some polynomial $f$. It happens to be so that setting $w = 1 - x
+        - y - z$ yields a very visually pleasing surface. This surface is named
+        the \emph{Cayley cubic} after the mathematician Arthur Cayley.  Setting
+        $w$ to various functions $f$ yield different visualizations of these
+        surfaces.
+        
+        The equation $xyz + (1 - x - y - z)(xy + xz + yz) = 0$ yields the
+        following surface:
+        \begin{figure}[]
+            \centering
+            \includegraphics[width=0.3\linewidth]{../pictures/cayley_cubic.png}
+            \caption{The Cayley-cubic given by the homogeneous equation $h(x,
+                y, z) = 1/w + 1 /x + 1 / y + 1/z = 0$.  This specific ''version''
+                is obtained by setting $w = 1 - x - y - z$.}
+            \label{fig:}
+        \end{figure}
+        Again, we see singularities of the surface, however this surface
+        exhibits more than just one. 
+    \end{exmpl}
+    One of the more extreme surfaces in terms of its singularities is the Barth
+    decic.
+    \begin{exmpl}[Barth decic]
+        The Barth Decic is given by the polynomial
+        \begin{multline}
+            h(x, y, z) = \\
+            8(x^2 - \varphi^4y^2)(y^2 - \varphi^4z^2)(z^2 - \varphi^4 x^2)(x^4 + y^4 +
+            z^4 - 2x^2y^2 - 2x^2z^2 - 2y^2z^2) \\ + (3 + 5\varphi)(x^2 + y^2 + z^2
+            - w^2)^2 \left[ x^2 + y^2 + z^2 - (2 - \varphi)w^2 \right]^2 w^2 \\
+            = 0, 
+        \end{multline}
+        where $\varphi$ denotes the golden ratio. Again, we dehomogenize this
+        polynomial, by setting $w = 1$. This yields the following picture.
+        \begin{figure}[]
+            \centering
+            \includegraphics[width=1.0\linewidth]{../pictures/barths_decic.png}
+            \caption{The Barth decic in all its glory. For $w = 1$ it exhibits
+            300 singularities.}
+            \label{fig:}
+        \end{figure}
+    \end{exmpl}
+
+    We have now seen examples of surfaces exhibiting so called
+    \emph{singularities}, but what are these? We discuss this in the following
+    section.
+
+    \subsection{The singularities of an algebraic surface.}
+    \label{sub:the_singularities_of_an_algebraic_surface_}
+    
+    \begin{defn}
+        A \emph{singularity} of a surface is a point $(x, y, z)$ where the defining
+        polynomial $h(x, y, z)$ and all the partial derivatives of $h$ vanish
+        identically. Mathematically, $(x, y, z)$ is a singularity if $h(x, y, z) =
+        0$ and
+        \begin{align*}
+            \notag
+            \frac{\partial}{\partial x} h(x, y, z) = \frac{\partial}{\partial
+            y} h(x, y, z) = \frac{\partial}{\partial z} h(x, y, z) = 0.
+        \end{align*}
+    \end{defn}
+    One interesting question to consider is whether there is a limit to how
+    many singularities a surface of degree $d$ can have. Given a degree $d$, we
+    let $\mu(d)$ denote the maximum number of singularities possible. It
+    happens to be that $\mu(d)$ is unknown for large values of $d$. 
+    
+    \begin{defn}
+        Let $V = \V(f_1, ..., f_m) \subset \A^n$. A singularity, or singular point, of $V$ is a point $p$ such that
+        the Jacobian matrix
+        \begin{equation}
+            \notag
+            \begin{bmatrix}
+                \frac{\partial f_1}{\partial x_1} && \ldots && \frac{\partial f_1}{\partial x_n} \\
+                \vdots && \ddots && \vdots \\
+                \frac{\partial f_m}{\partial x_1} && \ldots && \frac{\partial f_m}{\partial x_n} \\
+            \end{bmatrix} \left( p \right)
+        \end{equation}
+        has rank strictly less than $\min(m, n)$.
+    \end{defn}
+    \clearpage
+    \printbibliography
 \end{document}
