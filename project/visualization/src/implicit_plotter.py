@@ -20,4 +20,4 @@ def implicit_plotter(expr, ext_grid, grid_res=(101, 101, 101),**kwargs):
                        zl:zr:eval('{}j'.format(Nz))]
 
 if __name__ == "__main__":
-    implicit_plotter(expr='x + y + z', ext_grid=(0, 1, 0, 1, 0, 1))
+    implicit_plotter(expr='x - y**2', ext_grid=(0, 1, 0, 1, 0, 1))
