@@ -39,6 +39,17 @@
 \date{\textsc{MAT2000 - Spring 2016}}
 
 \begin{document}
+    \maketitle
+
+    \begin{abstract}
+       In this paper we give a brief overview of some of the things one can be
+       looking at when studying algebraic surfaces.  Mainly, we look at
+       singularities of such surfaces, how they arise and how one can remove
+       them. The images are rendered using the software \textsc{Surfer} unless
+       specified otherwise.  Some auxilliary \textsc{Python} and
+       \textsc{Mathematica} scripts has also been used.
+    \end{abstract}
+
     \tableofcontents
 
     \section{Preliminaries}
@@ -658,8 +669,219 @@
     \subsection{Blowing up a line of singularity.}
     \label{sub:blowing_up_a_line_of_singularity_}
     
-    In this section we will consider the algebraic surface 
+    In this section we will consider the algebraic surface given by the
+    polynomial 
+    \begin{equation}
+        \label{eq:whitney}
+        f(x, y, z) = x^2y - z^2.
+    \end{equation}
+    The associated variety is $\V(f(x, y, z))$. This surface is commonly known
+    as the ''Whitney Umbrella''\index{Whitney umbrella} and is shown visualized in
+    \cref{fig:whitney_umbrella}. As we will see shortly, when trying to blow up
+    this surface in a single point, say the origin, the resulting surface does
+    not seem to be any ''less singular''.
+   
+    \begin{figure}[h]
+        \centering
+        \includegraphics[width=0.4\linewidth]{pictures/blowup_line.png}
+        \caption{The ''Whitney Umbrella'' defined by the polynomial $f(x, y, z)
+        = x^2y - z^2$. This surface exhibits singularities all along the
+        $y$-axis, as can easily be pointed out on the picture.}
+        \label{fig:whitney_umbrella}
+    \end{figure}
+
+    \begin{example}[Blowup of the Whitney Umbrella in a single point $p$]
+        If we were to proceed by trying to blow up the origin, we quickly
+        encounter a problem. Following the standard procedure that we used in
+        the previous example, we get the defining equations $xs = yr$, $xt =
+        zr$ and $yt = zs$ with $r, s$ and $t$ our homogeneous coordinates.
+        Contrary to the previous example, we here get three affine charts, one
+        for each homogeneous coordinate.
+
+        \paragraph{Case 1:}
+        Setting $r = 1$ gives us $y = xs$ and $z = xt$. When plugged into
+        \cref{eq:whitney} gives the equation
+        \begin{equation}
+            \notag
+            g(x, s, t) = x^2(xs - t^2) = 0.
+        \end{equation}
+        
+        \paragraph{Case 2:}
+        We start by setting $s = 1$, which gives us $x = yr$ and $z = yt$.
+        Eliminating $x$ and $y$ from \cref{eq:whitney} yields the equation
+        \begin{equation}
+            \notag
+            h(y, r, t) = y^2(yr^2 - t^2) = 0.
+        \end{equation}
+        
+        \paragraph{Case 3:}
+        Finally, setting $t = 1$ yields $x = zr$ and $y = zs$, giving an
+        equation
+        \begin{equation}
+            \notag
+            i(z, r, s) = z^2(r^2sz - 1) = 0.
+        \end{equation}
+        These can be visualized, and the surfaces are shown in
+        \cref{fig:blowup_line_charts}. As we see in \cref{fig:whitney_blowup} 
+        the blowup fails to remove the singularities.
+
+        \begin{figure}[h]
+            \centering
+            \begin{subfigure}[t]{0.3\textwidth}
+                \includegraphics[width=\textwidth]{pictures/blowup_line_2.png}
+                \caption{$g(x, s, t) = 0$}
+            \end{subfigure}      
+            ~
+            \begin{subfigure}[t]{0.3\textwidth}
+                \includegraphics[width=\textwidth]{pictures/blowup_line_1.png}
+                \caption{$h(y, r, t) = 0$}
+                \label{fig:whitney_blowup}
+            \end{subfigure}      
+            ~
+            \begin{subfigure}[t]{0.3\textwidth}
+                \includegraphics[width=\textwidth]{pictures/blowup_line_3.png}
+                \caption{$i(z, r, s) = 0$}
+            \end{subfigure}      
+        \caption{The affine charts of the blowup of the Whitney Umbrella at the
+            point $p = (0, 0, 0)$. As we can see the singularities improve in
+            two of the charts, and in one case the chart is smooth. However,
+            the middle surface is identical to our original surface, so the
+            blow-up has failed to resolve all the singularities of the original
+            variety.}
+            \label{fig:blowup_line_charts}
+        \end{figure}      
+    \end{example} 
+   
+    As seen, in this case it is not sufficient to blow up only in one single
+    point. We may have to blow up the surface at a singular line, singular
+    curve or in general, any other set. We make a definition of the blowup of a
+    space in a line $L$, analogous to the blowup in a point,  We specialize
+    this definition for $\A^3$.
+
+    \begin{definition}[Blowup of $\A^3$ at a line $L$]
+        We let the blowup-surface $\Bl_L\A^3$ be the set of all pairs
+        consisting of a point $p \in \A^3$ and a point $\lambda \in \P^1$ such
+        that $H_\lambda$ is the unique plane that contains both the point $p$
+        and the line $L$ and write
+        \begin{equation}
+            \notag
+            \Bl_L\A^3 = \left\{ (p, \lambda) \in \A^3 \times \P^1 \mid p, L \in H_\lambda \right\}.
+        \end{equation}
+    \end{definition}
+
+    We illustrate this definition by again considering the Whitney Umbrella.
+    \begin{example}[Blowup of the Whitney Umbrella at a line $L$]
+        The singularities of the Whitney Umbrella lie along the $y$-axis, which
+        is described by the equations $x = z = 0$. Now, our goal here is to
+        find under what circumstances a plane $H_\lambda$ contains the point $p
+        = (x, y, z)$ as well as the line $L$. In other words, we want both the
+        $y$-axis and $p$ to lie in the plane $rx + sy + tz = 0$.
     
+        We first find the planes that contain the $y$-axis. Choosing the vector
+        $(0, 1, 0)$ as a representative for the $y$-axis we compute the cross
+        product between this vector and the point $(r, s, t)$ as a
+        representative for the plane.  This yields a normal vector given by
+        \begin{equation}
+            \notag
+            \vec{n} = \begin{vmatrix}
+                \hat{i} & \hat{j} & \hat{k} \\
+                r & s & t \\
+                0 & 1 & 0
+            \end{vmatrix} = (-t, 0, r).
+        \end{equation}
+        A plane containing the $y$-axis is then given by the equation $-tx + 0y
+        + rz = rz - tx = 0$. We can now consider the two affine charts by
+        setting $t = 1$ and $s = 1$ respectively.
+
+        \paragraph{Case 1:} 
+        \label{par:case_1_}
+        Setting $r = 1$ yields $z = tx$ which when plugged into $x^2y - z^2 = 0$
+        gives us $x^2y - (t^2x^2) = x^2(y - t^2) = 0$. This affine chart can be
+        visualized in the $(x, y, t)$-plane.
+
+        \paragraph{Case 2:}
+        \label{par:case_2_}
+        Setting $t = 1$ yields $x = rz$ which when plugged into $x^2y-z^2 = 0$
+        gives the equation $r^2z^2y - z^2 = r^2(z^2y - 1) = 0$. This can be
+        visualized in the $(r, y, z)$-plane.
+
+        \begin{figure}[h!]
+            \centering
+            \begin{subfigure}[t]{0.3\textwidth}
+                \includegraphics[width=\textwidth]{pictures/line_blowup_affine_1.png}
+                \caption{The surface given by the equation $x^2(y - t^2) = 0$. The
+                    curve of intersection between this surface and the exceptional
+                    divisor looks like it can be ''pinched'' into a double line, i.e., the
+                original line of singularity.}
+            \end{subfigure}
+            ~
+            \begin{subfigure}[t]{0.3\textwidth}
+                \includegraphics[width=\textwidth]{pictures/line_blowup_affine_2.png} 
+                \caption{The surface given by the equation $r^2(z^2y - 1) = 0$. The
+                    intersection between this surface and the exceptional divisor can
+                    also be ''fused'' together to form a double line, by laying the
+                surfaces flat on top of each other.}
+            \end{subfigure}
+            \\
+            \begin{subfigure}[t]{0.3\textwidth}
+                \includegraphics[width=\textwidth]{pictures/affine_1_exceptional.pdf} 
+            \end{subfigure}
+            ~
+            \begin{subfigure}[t]{0.3\textwidth}
+                \includegraphics[width=\textwidth]{pictures/affine_2_exceptional.pdf} 
+            \end{subfigure}
+            \caption{The two affine charts of the variety $\V(x^2y-z^2)$. The top
+                row is rendered by \textsc{Surfer}, and the bottom row rendered by
+                \textsc{Mathematica.} The exceptional divisor in the top row has
+                been divided out and is therefore not shown because \textsc{Surfer}
+                does a poor job at rendering planes. As seen, the charts are smooth and
+                exhibits no singularities. The intersection with the exceptional divisor is
+            rendered in blue in the bottom row.}
+        \end{figure}
+    \end{example}
+
+    While in the above example we blew up a very specific line of
+    singularities, namely the $y$-axis, it can be of interest to talk a little
+    bit about how to blow up general lines. It all boils down to generalizing
+    the construction of the plane for a more general line $L$. Assuming $L$ is
+    parametrized by $x = at, y = bt, z = ct$, with $a, b$ and $c$ non-zero, we
+    can form the symmetric equations 
+    \begin{equation}
+        \notag
+        t = \frac{x}{a} = \frac{y}{b} = \frac{z}{c}.
+    \end{equation}
+    The line $L$ is then completely determined by two of the three possible
+    relations $xb - ya = 0$, $xc - za = 0$ and $yc - zb = 0$.  In order to find
+    the respective plane, we are interested in knowing when the plane $rx + sy
+    + tz = 0$ can be expressed in terms of the line given by $xb - ya = 0$ and
+    $yc - zb = 0$. This can be solved as a matrix problem. Given the matrix
+    \begin{equation}
+        \notag
+        A = \begin{bmatrix}
+            b & 0 & r \\
+            -a & c & s \\
+            0 & -b & t
+        \end{bmatrix}
+    \end{equation}
+    one of the columns of $A$ is linearly dependent of the two others if
+    $\det(A) = 0$. Solving $\det(A) = 0$ gives the equation
+    \begin{equation}
+        \notag
+        \det(A) = b(ct + sb) + rab = 0.
+    \end{equation}
+    We can now solve for either one of $r, s$ and $t$. Solving for $r$ we get
+    $r = -( ct + sb ) / a$ which we can substitute back into the equation for
+    our plane.  The plane is then determined by 
+    \begin{equation}
+        \notag
+        \frac{-ct - sb}{a}x + sy + tz = 0.
+    \end{equation}
+    Multiplying through by $a$ we achieve
+    \begin{align*}
+        (-sb - ct)x + sya + tza &= -sbx - ctx + sya + tza \\
+                                &= t(za - cx) + s(ya - bx) = 0,
+    \end{align*}
+    which gives us the restrictions that we need.
     \clearpage
     \printbibliography \printindex
 \end{document}
