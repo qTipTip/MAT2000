@@ -1,0 +1,75 @@
+% Code listings
+\usepackage[]{listings}
+\usepackage[usenames, dvipsnames, svgnames, table]{xcolor}
+\usepackage[]{mdframed}
+\usepackage[]{calc} 
+
+\definecolor{TMcodeBackground}{RGB}{224, 224, 224}
+\definecolor{TMcodeFrame}{RGB}{109, 108, 109}
+\definecolor{TMgreen}{RGB}{14, 191, 48}
+\definecolor{TMorange}{RGB}{243, 126, 25}
+\definecolor{TMred}{RGB}{230, 6, 85}
+
+\defaultfontfeatures{Ligatures=TeX}
+\setmonofont{Source Code Pro Light}[BoldFont=Source Code Pro]
+
+\mdfdefinestyle{TMstyleCode}{
+            skipabove=4mm,
+            skipbelow=0mm,
+            %remove borders
+            rightline=false,
+            topline=false,
+            bottomline=false,
+            linewidth=1mm,
+            %margins
+            innertopmargin=2mm,
+            innerleftmargin=0mm,
+            innerbottommargin=0mm,
+            innerrightmargin=10pt,
+            linecolor=TMcodeFrame,
+            backgroundcolor=TMcodeBackground
+}
+
+\lstdefinestyle{TMstyle}{
+    showstringspaces=false,
+    numbers=left,
+    numbersep=7mm,
+    numberstyle=\color{Black},
+    stepnumber=1,
+    tabsize=3,
+    breakatwhitespace=false,
+    breaklines=true,
+    captionpos=b,
+    basicstyle=\color{Black}\ttfamily,
+    commentstyle=\color{TMgreen}\ttfamily,
+    keywordstyle=\color{TMorange}\bfseries,
+    stringstyle=\color{TMred},
+    frame=leftline,
+    framesep=0mm,
+    xleftmargin=3mm,
+    framesep=2mm,
+    framerule=0mm,
+    abovecaptionskip=5mm,
+    aboveskip=\baselineskip,
+    belowskip=\baselineskip
+}
+
+\lstnewenvironment{TMcode}[3]
+{
+    \lstset{style=TMstyle, language=#1, caption=#2}
+    \mdfsetup{style=TMstyleCode}
+    \mdframed
+    \hspace*{3mm}
+    \minipage{0.75cm}
+    \includegraphics[width=\linewidth]{pictures/code2.png}
+    \endminipage
+    \hspace*{1mm}
+    \minipage{\textwidth-1.05cm}
+        {\sffamily\Large #3}
+    \endminipage
+    \vspace*{-2mm}
+}
+{
+    \endmdframed
+}
+

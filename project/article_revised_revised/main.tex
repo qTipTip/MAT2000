@@ -10,6 +10,7 @@
 \declaretheorem[style=definition, qed=$\spadesuit$]{example}
 \declaretheorem[style=definition]{proposition}
 
+\input{code_style.tex}
 \usepackage[]{microtype} 
 \usepackage[]{enumitem} 
 \usepackage[]{graphicx} 
@@ -22,7 +23,7 @@
 \usepackage[]{url} 
 \urlstyle{sf}
 
-\usepackage[]{cleveref} 
+\usepackage[noabbrev]{cleveref} 
 
 \newcommand{\R}{\ensuremath{\mathbb{R}}}
 \newcommand{\C}{\ensuremath{\mathbb{C}}}
@@ -46,7 +47,7 @@
        looking at when studying algebraic surfaces.  Mainly, we look at
        singularities of such surfaces, how they arise and how one can remove
        them. The images are rendered using the software \textsc{Surfer} unless
-       specified otherwise.  Some auxilliary \textsc{Python} and
+       specified otherwise. Some auxilliary \textsc{Python} and
        \textsc{Mathematica} scripts has also been used.
     \end{abstract}
 
@@ -65,20 +66,10 @@
     is something most people that have been exposed to elementary mathematics
     have done. Later on, one learns how to find the zeroes of more general
     functions, of either one or several variables over some general field of
-    coefficients. This leads us to our first definition.
+    coefficients. Of special interest to us, are the polynomials over one or
+    several variables, given as elements of a \emph{polynomial ring} over some
+    field which we denote $K[x_1, x_2, \ldots, x_n]$.
 
-    \begin{definition}[Polynomial ring\index{polynomial ring} \cite{Pol16}]
-        A \emph{polynomial ring} in $n$ variables over a field $K$ is the set
-        of all functions on the form
-        \begin{equation}
-            \notag
-            f(x_1, \ldots, x_n) = \sum^{}_{\alpha} p_{\alpha}\prod_{i=1}^{n} x_n^{\alpha_i}
-        \end{equation}
-        where $\alpha = (\alpha_1, \alpha_2, \ldots, \alpha_n)$ is a
-        multi-index, and $p_\alpha = p_{\alpha_1,\ldots,\alpha_n}$ is an
-        element in $K$.  We denote this polynomial ring $K[x_1, x_2, \ldots,
-        x_n]$.
-    \end{definition} 
     As an example, the most familiar polynomial ring is $\R[x]$. Elements of
     this ring include
     \begin{align*}
@@ -91,18 +82,14 @@
     Given a set of polynomials, $f_1, f_2, \ldots, f_m$ in a polynomial ring
     $K[x_1, x_2, \ldots, x_n]$ we can look at their common zeroes. It is in our
     interest to restrict our attention to polynomial rings where the field of
-    coefficients is algebraically closed. We recall the definition:
+    coefficients is algebraically closed.
 
-    \begin{definition}[Algebraically closed field {\cite[p.~287]{FK03}}\index{algebraically closed field}]
-        A field $K$ is \emph{algebraically closed} if every non-constant
-        polynomial in $K[x_1, x_2, \ldots, x_n]$ has a zero in $K$.
-    \end{definition}
     Given an algebraically closed field $K$, we define \emph{affine
-    $n$-space}\index{affine $n$-space} over $K$ to be the set of all
-    $n$-tuples of elements of $K$. We denote affine $n$-space by $\A_K^n$ or
-    $\A^n$ if the field of coefficients is clear from context.  For our intents
-    and purposes, we will be working over the algebraically closed field of
-    complex numbers $\C$. 
+    $n$-space}\index{affine $n$-space} over $K$ to be the set of all $n$-tuples
+    of elements of $K$. We denote affine $n$-space by $\A_K^n$ or $\A^n$ if the
+    field of coefficients is clear from context.  For our intents and purposes,
+    we will be working over the algebraically closed field of complex numbers
+    $\C$. 
     
     We now define the mathematical object that is of utmost importance in the
     study of zeroes of polynomials, namely the variety.
@@ -146,7 +133,24 @@
     
     With this in mind, we define one of the more interesting properties of
     varieties, and one we will work with a lot in this article, namely the
-    singularities.
+    singularities. A singular point is, strictly speaking, a point on a surface
+    where the behaviour of the surface is slightly strange, say the surface
+    passes through itself. We are often interested in studying how a surface
+    behaves locally near a point $p$. We do this using \emph{linearization at
+    $p$}. This is what we do when we consider the tangent line to a point for a
+    single-valued function, the tangent plane for a general surface in three
+    dimensions, and a tangent \emph{hyperplane} for general surfaces in $n$
+    dimensions. The linearization of a surface given by $f(x_1, x_2, \ldots,
+    x_n) = 0$, at a point $p_0$ is given by
+    \begin{equation}
+        \notag
+        L(p) = f(p_0) + J_f(p_0)(p - p_0)
+    \end{equation}
+    where $J_f(p_0)$ is the Jacobian matrix of $f(x_1, x_2, \ldots, x_n)$
+    evaluated at $p_0$. If this matrix has rank less than $n$, then the
+    linearization is not uniquely defined, i.e., there are more than one plane
+    satisfying the linearization. This leads us to the next defintion.
+    
     \begin{definition}[Singularity {\cite[p.~3]{Whi08}}\index{singularity}]
         A singularity of the variety $V = \V(f_1, f_2, \ldots, f_m) \subset
         \A_K^n$ is a point $p \in V$ such that the Jacobian matrix
@@ -174,33 +178,53 @@
         We recall that the rank of a matrix is the dimension of its column
         space, that is for a matrix $A$, $\rank(A) = \dim(\Col(A))$.  Assume
         first that $p$ is a singularity of $V$. Then $\rank(A) < min(n, m) =
-        1$. This means that the matrix $A$ has no independent columns,
-        otherwise the columns of $A$ would span a space of dimension greater
-        than or equal to one. The Jacobian matrix reads in this case
-        \begin{equation}
-            \notag
-            A = \begin{bmatrix}
-                \frac{\partial f}{\partial x_1}(p) & \hdots & \frac{\partial f}{\partial x_n}(p)
-            \end{bmatrix}.
-        \end{equation}
-        Since the matrix has no independent columns, we cannot have any pivot
-        columns, hence each entry must be zero. Consequently, all partial
-        derivatives of $f$ vanish at $p$.  For the opposite implication, assume
-        that the partials vanish identically at $p$. Then the Jacobian matrix
-        reads
+        1$. Consequently, we must have $\rank(A) = 0$, and therefore $A$ equal
+        to the zero matrix. All the partial derivatives are therefore zero.
+        For the opposite implication, assume that the partials vanish
+        identically at $p$. Then the Jacobian matrix reads
         \begin{equation}
             \notag
             A = \begin{bmatrix}
                 0 & \hdots & 0
             \end{bmatrix},
-        \end{equation} and consequently $A$ has rank strictly less than one.
-        Hence $p$ is a point of singularity of $V$.
+        \end{equation}
+        and consequently $A$ has rank strictly less than one. Hence $p$ is a
+        point of singularity of $V$.
     \end{proof}
+    
+    Finally, we want to define the notion of a projective space, as this will
+    aid us in the resolution of singularities later on.  Informally, projective
+    space generalizes the notion of parallel lines intersecting at infinity.
+    The general definition of projective $n$-space is the set of lines in
+    $\A^{n+1}$ passing through the origin. For our purposes we will take
+    $\A^{n+1} = \C^{n+1}$.
+
+    \begin{definition}[The projective space of dimension $n$\index{projective space}]
+        Let $\sim$ be a relation on $\C^{n+1}\setminus \left\{ 0 \right\}$ defined by
+        \begin{equation}
+            \notag
+            (x_1, \ldots, x_{n+1}) \sim (x_1', \ldots, x_{n+1}')
+            \iff (x_1', \ldots, x_{n+1}') = \lambda(x_1, \ldots,
+            x_{n+1})
+        \end{equation}
+        where $\lambda$ is some non-zero complex number. This relation can be
+        shown to be an equivalence relation. We denote the
+        equivalence class of $(x_1, x_2, \ldots, x_{n+1})$ by $\left[ x_1 : x_2
+        : \ldots : x_{n+1} \right]$ and define the \emph{projective space of
+        dimension $n$} as the set 
+        \begin{equation}
+            \notag
+            \P^{n}_\C = \left\{ \left[ x_1 : \ldots : x_{n+1} \right] \mid (x_1,
+            \ldots , x_{n+1}) \in \C^{n+1}\setminus \left\{ 0 \right\}\right\}.
+        \end{equation}
+        The elements in $\P_\C^n$ are called \emph{homogeneous
+        coordinates}\index{homogeneous coordinates}. 
+    \end{definition}
+
 
     We now have the tools needed to start looking at algebraic surfaces.
     
-    \section{Algebraic Surfaces}
-    \label{sec:algebraic_surfaces}
+    \section{Introduction to algebraic surfaces}
     
     In this section, we try to motivate the definition of an algebraic surface,
     and look at some examples. Hopefully, this will give an intuitive
@@ -251,7 +275,7 @@
         \begin{subfigure}[t]{0.45\textwidth}
             \includegraphics[width=\textwidth]{pictures/node.pdf}
             \caption{The curve given by the equation $y^2 - x^3 - x^2 = 0$.
-            This curve is commonly known as ''The Node''. It exhibits a
+            This curve is commonly known as ``The Node''. It exhibits a
             singularity at the point $p = (0, 0)$ which can be verified by
             computing the partial derivatives at $p$.}
             \label{fig:node}
@@ -260,7 +284,7 @@
         \begin{subfigure}[t]{0.45\textwidth}
             \includegraphics[width=\textwidth]{pictures/cusp.pdf}
             \caption{The curve given by $y^2 - x^3 = 0$, or more commonly known
-            as ''The Cusp'', is also an example of a singular algebraic curve.
+            as ``The Cusp'', is also an example of a singular algebraic curve.
         The point $p = (0, 0)$ is a point of singularity.}
         \end{subfigure}
         \caption{Curves not corresponding to functions.}
@@ -426,7 +450,7 @@
         \end{figure}
     \end{example}     
     
-    From \cite[p.~7]{Lab14} we have the following relation on the maximum
+    From \cite[p.~7]{Lab14} we have the following upper bound on the maximum
     number of singularities for $d \geq 3$,
     \begin{equation}
         \notag
@@ -451,38 +475,7 @@
     process can be defined in many different ways, with the seemingly most
     prevalent one being through maps from various spaces to each other. In this
     paper we will try to keep it as intuitive as possible, by using the more
-    geometrically based procedure. We first define the notion of a projective
-    space.
-
-    \subsection{Projective space}
-    \label{sub:projective_space}
-    
-    Informally, projective space generalizes the notion of parallel lines
-    intersecting at infinity. The general definition of projective $n$-space is
-    the set of lines in $\A^{n+1}$ passing through the origin. For our purposes
-    we will take $\A^{n+1} = \C^{n+1}$.
-
-    \begin{definition}[The projective space of dimension $n$\index{projective space}]
-        Let $\sim$ be a relation on $\C^{n+1}\setminus \left\{ 0 \right\}$ defined by
-        \begin{equation}
-            \notag
-            (x_1, \ldots, x_{n+1}) \sim (x_1', \ldots, x_{n+1}')
-            \iff (x_1', \ldots, x_{n+1}') = \lambda(x_1, \ldots,
-            x_{n+1})
-        \end{equation}
-        where $\lambda$ is some non-zero complex number. This relation can be
-        shown to be an equivalence relation. We denote the
-        equivalence class of $(x_1, x_2, \ldots, x_{n+1})$ by $\left[ x_1 : x_2
-        : \ldots : x_{n+1} \right]$ and define the \emph{projective space of
-        dimension $n$} as the set 
-        \begin{equation}
-            \notag
-            \P^{n}_\C = \left\{ \left[ x_1 : \ldots : x_{n+1} \right] \mid (x_1,
-            \ldots , x_{n+1}) \in \C^{n+1}\setminus \left\{ 0 \right\}\right\}.
-        \end{equation}
-        The elements in $\P_\C^n$ are called \emph{homogeneous
-        coordinates}\index{homogeneous coordinates}. 
-    \end{definition}
+    geometrically based procedure.
 
     We now turn to the resolution of singularities. There are, as mentioned
     above, many ways of doing this, but we will here apply a geometrical
@@ -494,7 +487,7 @@
     We start by examining resolutions of single points. Informally, when we
     blow up a point $p$ in $\A^n$, we replace the point $p$ by an entire copy
     of a projective space $\P^{n-1}$ and try to leave the rest of the space
-    $\A^n$ ''unchanged''. We will give a few examples, that hopefully will
+    $\A^n$ ``unchanged''. We will give a few examples, that hopefully will
     illustrate the geometrical aspect of this, but first a formal definition.
 
     \begin{definition}[Blowup of $\A^{n}$ at a point $p$.]
@@ -509,7 +502,7 @@
     \end{definition}
     Now, this is a fairly technical definition, so where do we go from here?
     When blowing up a surface at a point $p$ we are essentially giving the
-    surface ''more room'' so that the points creating the singularities can
+    surface ``more room'' so that the points creating the singularities can
     pass each other without hassle. In order to aid us with the above
     definition, we show the following claim that tells us under what
     circumstances the point $p$ lie on the line $L$:
@@ -526,8 +519,8 @@
                 y_1 & y_2 & \hdots & y_n
             \end{bmatrix}
         \end{equation}
-        has rank less than or equal to one. Similarly, the rank is less than or
-        equal to one only if each $2\times 2$-minor $x_iy_j - x_jy_i = 0$ for
+        has rank less than or equal to 1. Similarly, the rank is less than or
+        equal to 1 if and only if each $2\times 2$-minor $x_iy_j - x_jy_i = 0$ for
         $1 \leq i < j \leq n$.
     \end{proposition} 
     \begin{proof}
@@ -608,9 +601,9 @@
         equation, namely
         \begin{equation}
             \notag
-            g(x, v) = x^2(v^2 - 1 - x).
+            g(x, v) = x^2(v^2 - 1 - x) = 0.
         \end{equation}
-        This function $g(x, v)$ is what we call an \emph{affine
+        The variety $\V(g(x, v))$ is what we call an \emph{affine
         chart}\index{affine chart} of the blowup-surface $\Bl_p\A^2$. It can be
         visualized in the $(x, v)$-plane.
 
@@ -621,7 +614,7 @@
         eliminate $x$ from \cref{eq:node}. This gives us a new equation
         \begin{equation}
             \notag
-            h(y, u) = y^2(1 - u^2 - u^2y).
+            h(y, u) = y^2(1 - u^2 - u^2y) = 0.
         \end{equation}
         This is the other affine chart of $\Bl_p\A^2$ and can be visualized in
         the $(y, u)$-plane.  The affine charts given by $h(x, y, z)$ and $g(x,
@@ -630,7 +623,7 @@
         The relation between these two charts, and the original surface can be
         visualized as in \cref{fig:blow_up_intuitive}.
 
-        \begin{figure}[h]
+        \begin{figure}[h!]
             \centering
             \begin{subfigure}[t]{0.4\textwidth}
                 \includegraphics[width=1.1\textwidth]{pictures/node_affine_1.pdf}
@@ -676,15 +669,15 @@
         f(x, y, z) = x^2y - z^2.
     \end{equation}
     The associated variety is $\V(f(x, y, z))$. This surface is commonly known
-    as the ''Whitney Umbrella''\index{Whitney umbrella} and is shown visualized in
+    as the ``Whitney Umbrella''\index{Whitney umbrella} and is shown visualized in
     \cref{fig:whitney_umbrella}. As we will see shortly, when trying to blow up
     this surface in a single point, say the origin, the resulting surface does
-    not seem to be any ''less singular''.
+    not seem to be any ``less singular''.
    
     \begin{figure}[h]
         \centering
         \includegraphics[width=0.4\linewidth]{pictures/blowup_line.png}
-        \caption{The ''Whitney Umbrella'' defined by the polynomial $f(x, y, z)
+        \caption{The ``Whitney Umbrella'' defined by the polynomial $f(x, y, z)
         = x^2y - z^2$. This surface exhibits singularities all along the
         $y$-axis, as can easily be pointed out on the picture.}
         \label{fig:whitney_umbrella}
@@ -805,13 +798,15 @@
         gives the equation $r^2z^2y - z^2 = r^2(z^2y - 1) = 0$. This can be
         visualized in the $(r, y, z)$-plane.
 
+        The two affine charts are shown visualized in \cref{fig:affine_line}.
+
         \begin{figure}[h!]
             \centering
             \begin{subfigure}[t]{0.3\textwidth}
                 \includegraphics[width=\textwidth]{pictures/line_blowup_affine_1.png}
                 \caption{The surface given by the equation $x^2(y - t^2) = 0$. The
                     curve of intersection between this surface and the exceptional
-                    divisor looks like it can be ''pinched'' into a double line, i.e., the
+                    divisor looks like it can be ``pinched'' into a double line, i.e., the
                 original line of singularity.}
             \end{subfigure}
             ~
@@ -819,7 +814,7 @@
                 \includegraphics[width=\textwidth]{pictures/line_blowup_affine_2.png} 
                 \caption{The surface given by the equation $r^2(z^2y - 1) = 0$. The
                     intersection between this surface and the exceptional divisor can
-                    also be ''fused'' together to form a double line, by laying the
+                    also be ``fused'' together to form a double line, by laying the
                 surfaces flat on top of each other.}
             \end{subfigure}
             \\
@@ -837,6 +832,7 @@
                 does a poor job at rendering planes. As seen, the charts are smooth and
                 exhibits no singularities. The intersection with the exceptional divisor is
             rendered in blue in the bottom row.}
+            \label{fig:affine_line}
         \end{figure}
     \end{example}
 
@@ -882,7 +878,63 @@
                                 &= t(za - cx) + s(ya - bx) = 0,
     \end{align*}
     which gives us the restrictions that we need.
+
+    \clearpage 
+    \appendix
+    
+    \section{Code snippets}
+    \label{sec:code_snippets}
+        
+    \lstset{deletekeywords={xrange}}
+    \begin{TMcode}{python}{curves.py - \url{http://stackoverflow.com/a/2484594}}{Plotting algebraic curves}
+    import matplotlib.pyplot
+    from numpy import arange
+    from numpy import meshgrid
+
+    delta = 0.025
+    xrange = arange(-5, 5.0, delta)
+    yrange = arange(-2.5, 2.5, delta)
+    X, Y = meshgrid(xrange,yrange)
+
+    # F is one side of the equation, G is the other
+    F = X**2*(1 - Y**2 - X*Y**3)
+    G = 0
+
+    matplotlib.pyplot.axis('on')
+    matplotlib.pyplot.grid('on')
+    matplotlib.pyplot.contour(X, Y, (F - G), [0])
+
+    matplotlib.pyplot.savefig('output.pdf')
+    \end{TMcode}
+
     \clearpage
-    \printbibliography \printindex
+    \begin{TMcode}{mathematica}{intersection.nb - \url{http://community.wolfram.com/groups/-/m/t/178218?p_p_auth=lT7er3Rd}}{Plotting the intersection between to surfaces}
+
+    (* affine chart and exceptional divisor *)
+    h = z^2 y - 1;
+    g = x^2;
+
+    ContourPlot3D[
+        {h == 0, g == 0}, 
+        (* bounding box dimensions *)
+        {x, -3, 3}, 
+        {y, -3, 3}, 
+        {z, -3, 3}, 
+        MeshFunctions -> {
+            Function[ {x, y, z, f}, h - g ]
+        }, 
+        MeshStyle -> {
+            { Thick, Blue }
+        }, 
+        Mesh -> {{0}}, 
+        ContourStyle -> Directive[
+                Green, Opacity[0.5], Specularity[White, 30]
+        ], 
+        PlotPoints -> 60,
+        SphericalRegion -> True
+    ]
+    \end{TMcode}
+
+    \printbibliography 
 \end{document}
 
