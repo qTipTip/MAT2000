@@ -14,11 +14,11 @@ X Ang korollar 3: beviset virker unødvendig komplisert: om rang(A) < 1, så er 
 
 X Gi Seksjon 2 en bedre overskrift. F.eks "Introduction to alg. surfaces" eller "Motivation to..." eller noe slikt.
 
- - Jeg vet ikke helt om jeg ville gått for å snakke om forskjellen på funksjonsgrafer versus generelle nullpunktsmengder. Det kan være en ide å nevne at det ene er et spesialtilfelle av det andre (og at generelt er funksjonsgrafer gitt ved (x,f(x)) for x i def-mengden).
+X Jeg vet ikke helt om jeg ville gått for å snakke om forskjellen på funksjonsgrafer versus generelle nullpunktsmengder. Det kan være en ide å nevne at det ene er et spesialtilfelle av det andre (og at generelt er funksjonsgrafer gitt ved (x,f(x)) for x i def-mengden).
 
- -  En måte å definere algebraiske flater på slik at du slipper å bruke ordet "dimensjon" udefinert, er ved å definere dem som nullpunktsmengder til polynomer i tre variable og/eller som nullpunktsmengder til homogene polynomer i fire variable (om flatene er i P^3). (disse har alle dim 2, men du slipper et udefinert begrep)
+X  En måte å definere algebraiske flater på slik at du slipper å bruke ordet "dimensjon" udefinert, er ved å definere dem som nullpunktsmengder til polynomer i tre variable og/eller som nullpunktsmengder til homogene polynomer i fire variable (om flatene er i P^3). (disse har alle dim 2, men du slipper et udefinert begrep)
 
- - Om Seksjon 3: ja, singulære algebraiske flater er ofte mer interessante å se på, men det er flust av glatte flater med masse symmetri også. Så, jeg ville kanskje byttet ut "mest interessant" med "interessant". På et vis er glatte flater mye mer interessante, fordi mange flere teoremer gjelder for dem. Mange teoremer gjelder ikke for singulære varieteter (f.eks trenger en varietet være glatt for at kodimensjon 1-varieteter skal være definert av ett polynom). Derfor er det også itneressant å kvitte seg med singularitene, f.eks med oppblåsninger. (men ja, det er utrolig mye interessant i singularitetsteori: klassifikasjon, oppløsning, deformasjoner, ...)
+X Om Seksjon 3: ja, singulære algebraiske flater er ofte mer interessante å se på, men det er flust av glatte flater med masse symmetri også. Så, jeg ville kanskje byttet ut "mest interessant" med "interessant". På et vis er glatte flater mye mer interessante, fordi mange flere teoremer gjelder for dem. Mange teoremer gjelder ikke for singulære varieteter (f.eks trenger en varietet være glatt for at kodimensjon 1-varieteter skal være definert av ett polynom). Derfor er det også itneressant å kvitte seg med singularitene, f.eks med oppblåsninger. (men ja, det er utrolig mye interessant i singularitetsteori: klassifikasjon, oppløsning, deformasjoner, ...)
 
  X "we have the following relation" ---- > "we have the following upper bound"
 
@@ -26,9 +26,9 @@ X Gi Seksjon 2 en bedre overskrift. F.eks "Introduction to alg. surfaces" eller 
 
  X Jeg ville kanskje introdusert projektivt rom i Seksjon 1.
 
- - I Definisjon 7 vil blowup av A^n i origio bare være en flate for n=2. (man kaller forresten vareiteter definert på denne måten for "incidence varities"
+ ? I Definisjon 7 vil blowup av A^n i origio bare være en flate for n=2. (man kaller forresten vareiteter definert på denne måten for "incidence varities"
 
- ? Beviset for Prop 2 er greit, bare litt lengre enn nødvendig.
+ X Beviset for Prop 2 er greit, bare litt lengre enn nødvendig.
 
  X Etter Case 1 i eksemplet: det er *nullpunktsmengden* til g(x,v) som er det affine kartet, ikke funksjonen.
 
@@ -36,17 +36,18 @@ X Gi Seksjon 2 en bedre overskrift. F.eks "Introduction to alg. surfaces" eller 
 
  X I Seksjon 4.3: for å skrive anførselstegn korrekt i LaTeX, ikke skriv " og ", men ``....''. 
 
- - "Blowing up a line in a singularity" er litt misvisende. Du kan forklare at når man blåser opp, så gjøres dette gjennom et "center", og her er linjen senteret. Man vil vanligvis at senteret er inneholdt i singulærlokusen for å forhindre at vi forandrer den originale varieteten.
+ X "Blowing up a line in a singularity" er litt misvisende. Du kan forklare at når man blåser opp, så gjøres dette gjennom et "center", og her er linjen senteret. Man vil vanligvis at senteret er inneholdt i singulærlokusen for å forhindre at vi forandrer den originale varieteten.
 
  X I stedet for "fig. 5", skriv heller ut "Figure 5".
 
- ?(Uenig) I Figur 6. Liten vits i å gi navn til hvert polynom om du ikke har tenkt å bruke dem igjen senere.
+ X (Uenig) I Figur 6. Liten vits i å gi navn til hvert polynom om du ikke har tenkt å bruke dem igjen senere.
 
- - Def 8 må forbedres, slik at det er klart hva lambda er. Slik det står nå gir det ikke mening. I eksemplet er det klart at lambda kan velges å være (r:s), men dette må forklares generelt.
+ X Def 8 må forbedres, slik at det er klart hva lambda er. Slik det står nå gir det ikke mening. I eksemplet er det klart at lambda kan velges å være (r:s), men dette må forklares generelt. 
+“ Fjern lambda “ - A^3 x P^2. Plan som inneholder L er parametrisert av P^1.
 
  X Du glemmer å reeferere til hvilken figur 7 i Eksempel 5.
 
- - Forklaringen for en generell linje kunne egentlig vært før eksemplet med linjen x=z=0. Også si eksplisitt hva lambda er for noe.
+ X Forklaringen for en generell linje kunne egentlig vært før eksemplet med linjen x=z=0. Også si eksplisitt hva lambda er for noe.
 
  X Det er kanskje ikke vits med en index for noe som er kortere enn en bok.
 
@@ -66,3 +67,9 @@ Uansett, dette burde være endel å gjøre. Ses i morgen!
 
 
 F
+
+x^2+y^2+z^2+2*x*y*z-1 - a*(x^2 + y^2 + z^2 - 1)^2 + a*x
+
+Eksempel til med oppblåsning der man trenger mer enn én oppblåsning.
+
+Lage en singulær flate med en gitt symmetri.

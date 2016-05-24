@@ -10,20 +10,21 @@
 \declaretheorem[style=definition, qed=$\spadesuit$]{example}
 \declaretheorem[style=definition]{proposition}
 
+\usepackage[]{fontspec} 
 \input{code_style.tex}
 \usepackage[]{microtype} 
 \usepackage[]{enumitem} 
 \usepackage[]{graphicx} 
 \usepackage[]{subcaption} 
 \usepackage[]{makeidx} 
+
+\usepackage[margin=2cm]{geometry} 
 \makeindex
 
 \usepackage[backend=biber, style=alphabetic]{biblatex} 
 \addbibresource{mat2000.bib}
 \usepackage[]{url} 
 \urlstyle{sf}
-
-\usepackage[noabbrev]{cleveref} 
 
 \newcommand{\R}{\ensuremath{\mathbb{R}}}
 \newcommand{\C}{\ensuremath{\mathbb{C}}}
@@ -35,6 +36,9 @@
 \DeclareMathOperator{\Col}{Col}
 \DeclareMathOperator{\rank}{rank}
 \DeclareMathOperator{\Bl}{Bl}
+
+\usepackage[]{hyperref} 
+\usepackage[noabbrev]{cleveref} 
 \title{Algebraic Surfaces}
 \author{Ivar Haugal{\o}kken Stangeby}
 \date{\textsc{MAT2000 - Spring 2016}}
@@ -44,15 +48,23 @@
 
     \begin{abstract}
        In this paper we give a brief overview of some of the things one can be
-       looking at when studying algebraic surfaces.  Mainly, we look at
-       singularities of such surfaces, how they arise and how one can remove
-       them. The images are rendered using the software \textsc{Surfer} unless
-       specified otherwise. Some auxilliary \textsc{Python} and
-       \textsc{Mathematica} scripts has also been used.
+       looking at when studying algebraic surfaces. We use a fairly naive
+       approach without the very abstract mathematical machinery that this
+       field has to offer. In \cref{sec:preliminaries} we give some of the
+       needed mathematical preliminaries. \Cref{sec:intro} motivates the
+       definition of an algebraic surface, the main object of study. In
+       \cref{sec:singularities} we look at one of the main properties of
+       algebraic surfaces, namely the singular points, and proceed by showing
+       how to resolve them i \cref{sec:resolving_singularities}. Finally, we
+       give an example of how to construct a singular surface with a certain
+       symmetry in \cref{sec:constructing_singular_surfaces}.  The images are
+       rendered using the software \textsc{Surfer} unless specified otherwise.
+       Some auxiliary \textsc{Python} and \textsc{Mathematica} scripts has also
+       been used. 
     \end{abstract}
 
     \tableofcontents
-
+             
     \section{Preliminaries}
     \label{sec:preliminaries}
     
@@ -113,6 +125,7 @@
     fact, and state without proof the following.
     
     \begin{corollary}
+        \label{crl:set_one}
         Given a set of polynomials $f_1, f_2, \ldots, f_m$, the variety
         $\V(f_1, f_2, \ldots, f_m)$ can be expressed as a finite intersection
         \begin{equation}
@@ -123,12 +136,13 @@
     It is also of interest, especially when aiming to create and visualize
     interesting figures, that the following hold:
     \begin{corollary}
-    Given a set of polynomials $f_1, f_2, \ldots, f_m$, the affine algebraic
-    variety of the product $f_1f_2\cdots f_m$ is expressible as a finite union
-    \begin{equation}
-        \notag
-        \V(f_1f_2\cdots f_m) = \bigcup_{i=1}^{m} \V(f_i).
-    \end{equation}
+        \label{crl:set_two}
+        Given a set of polynomials $f_1, f_2, \ldots, f_m$, the affine algebraic
+        variety of the product $f_1f_2\cdots f_m$ is expressible as a finite union
+        \begin{equation}
+            \notag
+            \V(f_1f_2\cdots f_m) = \bigcup_{i=1}^{m} \V(f_i).
+        \end{equation}
     \end{corollary}
     
     With this in mind, we define one of the more interesting properties of
@@ -149,7 +163,7 @@
     where $J_f(p_0)$ is the Jacobian matrix of $f(x_1, x_2, \ldots, x_n)$
     evaluated at $p_0$. If this matrix has rank less than $n$, then the
     linearization is not uniquely defined, i.e., there are more than one plane
-    satisfying the linearization. This leads us to the next defintion.
+    satisfying the linearization. This leads us to the next definition.
     
     \begin{definition}[Singularity {\cite[p.~3]{Whi08}}\index{singularity}]
         A singularity of the variety $V = \V(f_1, f_2, \ldots, f_m) \subset
@@ -200,7 +214,7 @@
     $\A^{n+1} = \C^{n+1}$.
 
     \begin{definition}[The projective space of dimension $n$\index{projective space}]
-        Let $\sim$ be a relation on $\C^{n+1}\setminus \left\{ 0 \right\}$ defined by
+        Let $\sim$ be a relation on $\C^{n+1} \setminus \left\{ 0 \right\}$ defined by
         \begin{equation}
             \notag
             (x_1, \ldots, x_{n+1}) \sim (x_1', \ldots, x_{n+1}')
@@ -225,7 +239,7 @@
     We now have the tools needed to start looking at algebraic surfaces.
     
     \section{Introduction to algebraic surfaces}
-    
+    \label{sec:intro}    
     In this section, we try to motivate the definition of an algebraic surface,
     and look at some examples. Hopefully, this will give an intuitive
     introduction to exactly what we will we looking at. We start by looking at
@@ -237,30 +251,19 @@
     From elementary mathematics, one learns about real valued functions,
     $f(x)$, and how to plot these functions by setting $y = f(x)$ and plotting
     points in the $(x, y)$-plane. This yields a curve of sorts, moving around
-    in the plane.
-
-    The graph of a function is something of a peculiarity, because it comes
-    with some restrictions. Not all curves in the $(x, y)$-plane correspond to
-    a specific function. One of the standard methods for verifying whether a
-    certain curve corresponds to a function or not, typically taught in school,
-    is the \emph{vertical line test}. If you can draw a vertical line through
-    two or more points on the curve, then the curve is not associated to any
-    specific function. There is however a limit to how interesting
-    function-curves can be.
-
-    Having an equation $y = f(x)$ we can form the \emph{equation of a curve at
-    zero}. We define a new function in two variables and equate it to zero.
-    This yields
+    in the plane.  Having an equation $y = f(x)$ we can form the \emph{equation
+    of a curve at zero}. We define a new function in two variables and equate
+    it to zero. This yields
     \begin{equation}
         \notag
         g(x, y) = y - f(x) = 0.
     \end{equation}
     The set of points along the curve described by this equation is precisely
-    the points that lie in the variety $\V(g(x, y))$.
-    If the function $f(x)$ is a polynomial in the variable $x$, i.e., $f(x) \in
-    K[x]$, we call the function curve of $f(x)$ algebraic. If the distinction
-    between a function graph and curves is to be justified, then there has to
-    be curves that are not function graphs.
+    the points that lie in the variety $\V(g(x, y))$.  If the function $f(x)$
+    is a polynomial in the variable $x$, i.e., $f(x) \in K[x]$, we call the
+    function curve of $f(x)$ algebraic. Now, all the curves formed in this way
+    corresponds to some function. There are however curves that does not
+    correspond to functions and these are given as general polynomials.
 
     Plotting the result when setting $y^2 - x^3$, the plotted curve does not
     pass the vertical line test and is therefore something different from a
@@ -287,7 +290,8 @@
             as ``The Cusp'', is also an example of a singular algebraic curve.
         The point $p = (0, 0)$ is a point of singularity.}
         \end{subfigure}
-        \caption{Curves not corresponding to functions.}
+        \caption{First examples of algebraic curves. Visualized using
+        \textsc{Python}. Code can be seen in \cref{sec:code_snippets}.}
         \label{fig:algebraic_curves}
     \end{figure}
     
@@ -297,9 +301,10 @@
     Instead of considering curves in the $(x, y)$-plane, we can instead look at
     surfaces in the three-dimensional $(x, y, z)$-space. Following the same
     procedure as above, we define a new function $h(x, y, z) = z - g(x, y)$.
-    Completely analogous to the definition made for curves, we call the surface
-    \emph{algebraic} if $h(x, y, z)$ is a polynomial in the variables $x, y,
-    z$. That is $h(x, y, z) \in K[x, y, z]$. We give some examples.
+    This function equated at zero yields a surface.  Completely analogous to
+    the definition made for curves, we call the surface \emph{algebraic} if
+    $h(x, y, z)$ is a polynomial in the variables $x, y, z$. That is $h(x, y,
+    z) \in K[x, y, z]$. We give some examples.
 
     \begin{example}
         \label{exmpl:algebraic_surfaces}
@@ -341,15 +346,12 @@
     by formally defining an algebraic surface. In any case, the surfaces are
     defined by the variety of some defining polynomial.
     \begin{definition}[Algebraic surface\index{algebraic surface}]
-        An \emph{algebraic surface} is an algebraic variety of
-        dimension\footnote{The dimension of an algebraic variety is a bit hard
-            to grasp, and since we only will be dealing with algebraic surfaces
-            in this text we do not spend any time classifying the different
-        kinds of varieties. The explanation of this is therefore omitted. See
-    \cite{Dim16}.}
-            two.  We define the \emph{degree}\index{algebraic surface!degree}
-            of an algebraic surface to be the highest combined power in the
-            defining polynomials terms, and denote this $d$.  That is,
+        Given a set of polynomials $f_1, f_2, \ldots, f_m$ in three variables,
+        i.e., in $K[x, y, z]$ we define an \emph{algebraic surface} to be the
+        algebraic variety $\V(f_1, f_2, \ldots, f_m)$.  We define the
+        \emph{degree}\index{algebraic surface!degree} of an algebraic surface
+        to be the highest combined power in the defining polynomials terms, and
+        denote this $d$. That is,
         \begin{equation}
             \notag
             d = \max_{\alpha}\left\{ \alpha_1 + \alpha_2 + \ldots \alpha_n \right\}
@@ -361,13 +363,20 @@
     
     \section{Singularities}
     \label{sec:singularities}
-    The singularities of an algebraic surface is one of the important elements
-    that give the surface its visual appeal. I am sure most people agree with
-    me, when I say that a surface full of singularities is more intriguing than
-    one with no singularities at all. The singularities, along with their
-    configurations, symmetries and their number are things that one can explore
-    further.
      
+    When studying algebraic surfaces we typically differentiate between two
+    types of surfaces, namely the singular ones and the non-singular ones.
+    These two categories are each interesting in their own respect. A lot of
+    mathematical theory concerning surfaces only hold for surfaces that exhibit
+    no singularities at all. It is therefore often of interest to somehow
+    remove these singularities from the surface in order to apply known
+    results.
+    
+    The theory of singular surfaces on the other hand contains a lot of
+    interesting theory that deals with: the classification of singularities,
+    what different types of singularities are there; resolution of
+    singularities; and deformation theory.
+    
     \subsection{The number of singularities}
     \label{sub:the_number_of_singularities}
 
@@ -456,7 +465,7 @@
         \notag
         \mu(d) \leq \frac{1}{2}(d(d-1)^2 - 3)
     \end{equation}
-    and plugging in $d = 3$ yields $\mu(d) \leq 4$. However, we have already
+    and plugging in $d = 3$ yields $\mu(3) \leq 4$. However, we have already
     presented a surface of degree $d = 3$ with four singularities, so in fact
     $\mu(d) = 4$. The theory of finding the maximal number of singularities of
     a given degree and constructing surfaces that exhibit all is a very
@@ -477,18 +486,21 @@
     paper we will try to keep it as intuitive as possible, by using the more
     geometrically based procedure.
 
-    We now turn to the resolution of singularities. There are, as mentioned
-    above, many ways of doing this, but we will here apply a geometrical
-    approach.
+    When we blow up, we blow up along a \emph{center} of the variety. By making
+    sure that this center is contained in the singular locus of the variety, we
+    do not change the surrounding surface. We first consider the case where the
+    blowup center is a single point, and then an example where the center is a
+    line.
 
-    \subsection{Blowing up a point singularity.}
+    \subsection{Blowing up a point}
     \label{sub:blowing_up_a_point_singularity_}
     
     We start by examining resolutions of single points. Informally, when we
     blow up a point $p$ in $\A^n$, we replace the point $p$ by an entire copy
     of a projective space $\P^{n-1}$ and try to leave the rest of the space
-    $\A^n$ ``unchanged''. We will give a few examples, that hopefully will
-    illustrate the geometrical aspect of this, but first a formal definition.
+    $\A^n$ ``unchanged''. We will
+    give a few examples, that hopefully will illustrate the geometrical aspect
+    of this, but first a formal definition.
 
     \begin{definition}[Blowup of $\A^{n}$ at a point $p$.]
         We let the \emph{blowup-surface}\index{blowup-surface!in a point}
@@ -618,25 +630,24 @@
         \end{equation}
         This is the other affine chart of $\Bl_p\A^2$ and can be visualized in
         the $(y, u)$-plane.  The affine charts given by $h(x, y, z)$ and $g(x,
-        y, z)$ are shown visualized in \cref{fig:affine_charts_node}.
-        
-        The relation between these two charts, and the original surface can be
+        y, z)$ are shown visualized in \cref{fig:affine_charts_node}.  The
+        relation between these two charts, and the original surface can be
         visualized as in \cref{fig:blow_up_intuitive}.
 
         \begin{figure}[h!]
             \centering
-            \begin{subfigure}[t]{0.4\textwidth}
+            \begin{subfigure}[t]{0.3\textwidth}
                 \includegraphics[width=1.1\textwidth]{pictures/node_affine_1.pdf}
                 \caption{The affine chart resulting from setting $u = 1$ and
                 eliminating $y$ in the original equation.}
             \end{subfigure}
             ~
-            \begin{subfigure}[t]{0.4\textwidth}
+            \begin{subfigure}[t]{0.3\textwidth}
                 \includegraphics[width=1.1\textwidth]{pictures/node_affine_2.pdf}
                 \caption{The affine chart resulting from setting $v = 1$ and
                 eliminating $x$ in the original equation}
-            \end{subfigure}
-            \begin{subfigure}[t]{0.4\textwidth}
+            \end{subfigure} \\
+            \begin{subfigure}[t]{0.3\textwidth}
                 \includegraphics[width=1.0\textwidth]{pictures/blow_up_intuitive.pdf}
                 \caption{A visual depiction of the blowup surface that clearly
                     shows how the singularity in the origin is resolved. Taken
@@ -647,9 +658,9 @@
                 in slightly brighter blue, is called the \emph{exceptional
                 divisor}\index{exceptional divisor} and corresponds to the
                 blowup of what was the origin in the original surface. Note
-                that the curves intersect the exceptional divisor in exactly
-                two points. This corresponds to the double point singularity in the
-                original surface.}
+                that the curves intersect the exceptional divisor in exactly two
+                points. This corresponds to the double point singularity in the
+                original surface. The top row is visualized in \textsc{Python}.}
             \label{fig:affine_charts_node}
         \end{figure}
     \end{example}
@@ -659,7 +670,7 @@
     up the surface in a single point is not sufficient for removing the
     singularities. 
     
-    \subsection{Blowing up a line of singularity.}
+    \subsection{Blowing up a line}
     \label{sub:blowing_up_a_line_of_singularity_}
     
     In this section we will consider the algebraic surface given by the
@@ -676,7 +687,7 @@
    
     \begin{figure}[h]
         \centering
-        \includegraphics[width=0.4\linewidth]{pictures/blowup_line.png}
+        \includegraphics[width=0.3\linewidth]{pictures/blowup_line.png}
         \caption{The ``Whitney Umbrella'' defined by the polynomial $f(x, y, z)
         = x^2y - z^2$. This surface exhibits singularities all along the
         $y$-axis, as can easily be pointed out on the picture.}
@@ -720,18 +731,18 @@
 
         \begin{figure}[h]
             \centering
-            \begin{subfigure}[t]{0.3\textwidth}
+            \begin{subfigure}[t]{0.2\textwidth}
                 \includegraphics[width=\textwidth]{pictures/blowup_line_2.png}
                 \caption{$g(x, s, t) = 0$}
             \end{subfigure}      
             ~
-            \begin{subfigure}[t]{0.3\textwidth}
+            \begin{subfigure}[t]{0.2\textwidth}
                 \includegraphics[width=\textwidth]{pictures/blowup_line_1.png}
                 \caption{$h(y, r, t) = 0$}
                 \label{fig:whitney_blowup}
             \end{subfigure}      
             ~
-            \begin{subfigure}[t]{0.3\textwidth}
+            \begin{subfigure}[t]{0.2\textwidth}
                 \includegraphics[width=\textwidth]{pictures/blowup_line_3.png}
                 \caption{$i(z, r, s) = 0$}
             \end{subfigure}      
@@ -751,29 +762,73 @@
     space in a line $L$, analogous to the blowup in a point,  We specialize
     this definition for $\A^3$.
 
-    \begin{definition}[Blowup of $\A^3$ at a line $L$]
+    \begin{definition}[Blowup of $\A^3$ at a line $L$] 
+        Given a point $p$ and a line $L$, we are interested in the unique plane
+        $H$ that contains both $p$ and $L$.  Since it contains $L$, the plane
+        can be parametrized by a point $\lambda \in \P^1$. 
+
         We let the blowup-surface $\Bl_L\A^3$ be the set of all pairs
-        consisting of a point $p \in \A^3$ and a point $\lambda \in \P^1$ such
-        that $H_\lambda$ is the unique plane that contains both the point $p$
-        and the line $L$ and write
+        consisting of a point $p \in \A^3$ and a point $\lambda \in \P^1$ that
+        parametrizes the unique plane $H$ that contains both $p$ and $L$.  We
+        write
         \begin{equation}
             \notag
-            \Bl_L\A^3 = \left\{ (p, \lambda) \in \A^3 \times \P^1 \mid p, L \in H_\lambda \right\}.
+            \Bl_L\A^3 = \left\{ (p, \lambda) \in \A^3 \times \P^1 \mid p, L \in H \right\}.
         \end{equation}
     \end{definition}
+    
+    Again, this is a fairly technical definition, so where do we go from here?
+    Assuming $L$ is parametrized by $x = at, y = bt, z = ct$, with $a, b$ and
+    $c$ non-zero, we can form the symmetric equations 
+    \begin{equation}
+        \notag
+        t = \frac{x}{a} = \frac{y}{b} = \frac{z}{c}.
+    \end{equation}
+    The line $L$ is then completely determined by two of the three possible
+    relations $xb - ya = 0$, $xc - za = 0$ and $yc - zb = 0$.  In order to find
+    the respective plane, we are interested in knowing when the plane $rx + sy
+    + tz = 0$ can be expressed in terms of the line given by $xb - ya = 0$ and
+    $yc - zb = 0$. This can be solved as a matrix problem. Given the matrix
+    \begin{equation}
+        \notag
+        A = \begin{bmatrix}
+            b & 0 & r \\
+            -a & c & s \\
+            0 & -b & t
+        \end{bmatrix}
+    \end{equation}
+    one of the columns of $A$ is linearly dependent of the two others if
+    $\det(A) = 0$. Solving $\det(A) = 0$ gives the equation
+    \begin{equation}
+        \notag
+        \det(A) = b(ct + sb) + rab = 0.
+    \end{equation}
+    We can now solve for either one of $r, s$ and $t$. Solving for $r$ we get
+    $r = -( ct + sb ) / a$ which we can substitute back into the equation for
+    our plane.  The plane is then determined by 
+    \begin{equation}
+        \notag
+        \frac{-ct - sb}{a}x + sy + tz = 0.
+    \end{equation}
+    Multiplying through by $a$ we achieve
+    \begin{align*}
+                                t(za - cx) + s(ya - bx) = 0,
+    \end{align*}
+    which gives us the restrictions that we need. The $\lambda$ that
+    parametrizes the plane $H$ is then the point $[t:s] \in \P^1$.
 
     We illustrate this definition by again considering the Whitney Umbrella.
     \begin{example}[Blowup of the Whitney Umbrella at a line $L$]
         The singularities of the Whitney Umbrella lie along the $y$-axis, which
         is described by the equations $x = z = 0$. Now, our goal here is to
-        find under what circumstances a plane $H_\lambda$ contains the point $p
-        = (x, y, z)$ as well as the line $L$. In other words, we want both the
+        find under what circumstances a plane $H$ contains the point $p = (x,
+        y, z)$ as well as the line $L$. In other words, we want both the
         $y$-axis and $p$ to lie in the plane $rx + sy + tz = 0$.
     
         We first find the planes that contain the $y$-axis. Choosing the vector
         $(0, 1, 0)$ as a representative for the $y$-axis we compute the cross
         product between this vector and the point $(r, s, t)$ as a
-        representative for the plane.  This yields a normal vector given by
+        representative for the plane. This yields a normal vector given by
         \begin{equation}
             \notag
             \vec{n} = \begin{vmatrix}
@@ -783,8 +838,9 @@
             \end{vmatrix} = (-t, 0, r).
         \end{equation}
         A plane containing the $y$-axis is then given by the equation $-tx + 0y
-        + rz = rz - tx = 0$. We can now consider the two affine charts by
-        setting $t = 1$ and $s = 1$ respectively.
+        + rz = rz - tx = 0$. The point $\lambda$ is in this case the point $[r:
+        t] \in \P^1$. We can now consider the two affine charts by setting $r =
+        1$ and $t = 1$ respectively.
 
         \paragraph{Case 1:} 
         \label{par:case_1_}
@@ -825,68 +881,148 @@
             \begin{subfigure}[t]{0.3\textwidth}
                 \includegraphics[width=\textwidth]{pictures/affine_2_exceptional.pdf} 
             \end{subfigure}
-            \caption{The two affine charts of the variety $\V(x^2y-z^2)$. The top
-                row is rendered by \textsc{Surfer}, and the bottom row rendered by
-                \textsc{Mathematica.} The exceptional divisor in the top row has
-                been divided out and is therefore not shown because \textsc{Surfer}
-                does a poor job at rendering planes. As seen, the charts are smooth and
-                exhibits no singularities. The intersection with the exceptional divisor is
-            rendered in blue in the bottom row.}
+            \caption{The two affine charts of the variety $\V(x^2y-z^2)$. The
+                top row is rendered by \textsc{Surfer}, and the bottom row
+                rendered by \textsc{Mathematica.} The exceptional divisor in
+                the top row has been divided out and is therefore not shown
+                because \textsc{Surfer} does a poor job at rendering planes. As
+                seen, the charts are smooth and exhibits no singularities. The
+                intersection with the exceptional divisor is rendered in blue
+                in the bottom row. The bottom row is visualized using
+            \textsc{Mathematica}.}
             \label{fig:affine_line}
         \end{figure}
     \end{example}
-
-    While in the above example we blew up a very specific line of
-    singularities, namely the $y$-axis, it can be of interest to talk a little
-    bit about how to blow up general lines. It all boils down to generalizing
-    the construction of the plane for a more general line $L$. Assuming $L$ is
-    parametrized by $x = at, y = bt, z = ct$, with $a, b$ and $c$ non-zero, we
-    can form the symmetric equations 
-    \begin{equation}
-        \notag
-        t = \frac{x}{a} = \frac{y}{b} = \frac{z}{c}.
-    \end{equation}
-    The line $L$ is then completely determined by two of the three possible
-    relations $xb - ya = 0$, $xc - za = 0$ and $yc - zb = 0$.  In order to find
-    the respective plane, we are interested in knowing when the plane $rx + sy
-    + tz = 0$ can be expressed in terms of the line given by $xb - ya = 0$ and
-    $yc - zb = 0$. This can be solved as a matrix problem. Given the matrix
-    \begin{equation}
-        \notag
-        A = \begin{bmatrix}
-            b & 0 & r \\
-            -a & c & s \\
-            0 & -b & t
-        \end{bmatrix}
-    \end{equation}
-    one of the columns of $A$ is linearly dependent of the two others if
-    $\det(A) = 0$. Solving $\det(A) = 0$ gives the equation
-    \begin{equation}
-        \notag
-        \det(A) = b(ct + sb) + rab = 0.
-    \end{equation}
-    We can now solve for either one of $r, s$ and $t$. Solving for $r$ we get
-    $r = -( ct + sb ) / a$ which we can substitute back into the equation for
-    our plane.  The plane is then determined by 
-    \begin{equation}
-        \notag
-        \frac{-ct - sb}{a}x + sy + tz = 0.
-    \end{equation}
-    Multiplying through by $a$ we achieve
-    \begin{align*}
-        (-sb - ct)x + sya + tza &= -sbx - ctx + sya + tza \\
-                                &= t(za - cx) + s(ya - bx) = 0,
-    \end{align*}
-    which gives us the restrictions that we need.
-
-    \clearpage 
-    \appendix
     
+    \section{Constructing singular surfaces}
+    \label{sec:constructing_singular_surfaces}
+    
+    In this section we take a brief look at how one can construct singular
+    surfaces with a certain symmetry. The way we will be doing this is based on
+    the set theoretic results given in \cref{crl:set_one} and
+    \cref{crl:set_two}. This is purely exploratory and is merely a matter of
+    trying things out and seeing what the results are.
+
+    As a baseline for our surface, we wish to use the zero set of the function
+    \begin{equation*}
+        f(x, y, z) = (x - y)(x + y)(x - z)(x + z)(y - z)(y + z).
+    \end{equation*}
+    We let $\mathcal{B} = \V(f(x, y, z))$ This surface is the intersection of
+    six planes, as shown in \cref{fig:construction_one}. This surface has a
+    very nice set of singularities, namely on the intersection between the
+    planes. It also has a nice symmetry that we want our final surface to
+    inherit.
+
+    We can now take $\mathcal{B}$ and ``flesh it out'' by adding another
+    polynomial to the defining function. We want to add a surface that has a
+    group of symmetry that contains the symmetry group of $\mathcal{B}$. In our
+    case, the unit sphere seems a reasonable choice. The unit sphere is given
+    by $g(x, y, z) = x^2 + y^2 + z^2 - 1$. We let $\mathcal{S} = \V(g(x, y,
+    z))$. Define $\mathcal{B} + \mathcal{S} = \V(f(x, y, z) + g(x, y, z))$.
+    This surface has now gone from singular to smooth, but, while a bit hard to
+    see, it does retain all the symmetries of $\mathcal{B}$ as shown in
+    \cref{fig:construction_two}.
+
+    In order to regain the set of singularities, we can instead add powers of
+    $\mathcal{S}$ to $\mathcal{B}$. By powers of $\mathcal{S}$ we mean
+    $\mathcal{S}^n = \V(g(x, y, z)^n)$. If $n$ is an even number, we get a
+    surface with holes as shown in \cref{fig:construction_three}. If we instead
+    were to take $n$ an odd number, we get a solid surface with no holes, as in
+    \cref{fig:construction_four}. The higher the value we chose for $n$, the
+    more protruding the nodes of the surface become.
+
+           
+
+    \begin{figure}[h]
+        \centering
+        \begin{subfigure}[t]{0.2\textwidth}
+            \includegraphics[width=\textwidth]{pictures/construction_one.png}
+            \caption{$\mathcal{B}$}
+            \label{fig:construction_one}
+        \end{subfigure}
+        ~
+        \begin{subfigure}[t]{0.2\textwidth}
+            \includegraphics[width=\textwidth]{pictures/construction_1_5.png}
+            \caption{$\mathcal{B}+ \mathcal{S}$}
+            \label{fig:construction_two}
+        \end{subfigure}
+        ~
+        \begin{subfigure}[t]{0.2\textwidth}
+            \includegraphics[width=\textwidth]{pictures/construction_two.png}
+            \caption{$\mathcal{B} + \mathcal{S}^n$ for $n$ even.}
+            \label{fig:construction_three}
+        \end{subfigure}
+        ~
+        \begin{subfigure}[t]{0.2\textwidth}
+            \includegraphics[width=\textwidth]{pictures/construction_odd.png}
+            \caption{$\mathcal{B} + \mathcal{S}^n$ for $n$ odd.}
+            \label{fig:construction_four}
+        \end{subfigure}
+        \caption{Constructing a singular surface with a given symmetry and set
+            of singularities. The surface $\mathcal{B}$ is the product of six
+            planes. The surface $\mathcal{S}$ is the unit sphere. By adding
+            various powers of $\mathcal{S}$ to $\mathcal{B}$ we achieve a
+        surface that retains the symmetries and singularities of
+    $\mathcal{B}$.}
+        \label{fig:construction}
+    \end{figure}
+    
+    \section{Conclusion}
+    \label{sec:conclusion}
+
+    This paper was meant as a way of introducing the reader to some of the
+    aspects of algebraic geometry, specifically dealing with algebraic
+    surfaces. The intention was to, by restricting our attention to specific
+    examples, avoid having to take into account the fairly theoretical
+    mathematics that lie behind the scenes.  We have briefly touched upon
+    different kinds of theory related to these algebraic surfaces, which might
+    have piqued an interest.  Algebraic surfaces, while being very intuitive
+    objects in some sense, trying to figure out what they really are can
+    quickly prove a challenge because the mathematics is so involved. 
+
+    Algebraic surfaces can also work as a solid entry point into visualization
+    techniques and computational mathematics, and while not talked about here,
+    we have seen some end results of the mathematical endeavours related to this
+    area of expertise, through the usage of \textsc{Surfer},
+    \textsc{Mathematica} and \textsc{Python}.
+
+    As the author of this text, it has been great fun trying to wrap my head
+    around these things, and I hope I will get the opportunity to explore this
+    field of mathematics in greater detail.  
+    \clearpage \appendix
+
+    \section{Installing visualization software}
+    
+    The algebraic surface visualization industry is definitely not a million
+    dollar business, hence there are only a select few ``out of the box''
+    visualization softwares out there. Most notably are \textsc{Surf},
+    \textsc{Surf-Ex}, \textsc{Spicy} and \textsc{Surfer}. While fairly modest
+    in its features, \textsc{Surfer} is the one we have chosen for this paper,
+    due to its ease of installation and ease of use. In that regard, it is
+    perfect for this kind of introductory/exploratory text.  The software can
+    be downloaded from
+    \begin{center}
+        \url{https://imaginary.org/program/surfer#all-downloads}
+    \end{center}
+    and is compiled for use with Windows, \textsc{OS-X} and Linux operating
+    systems. Debian based Linux distributions will want to download the
+    \textsf{.deb} package, where as Red-Hat systems will want to use the
+    \textsf{.rpm} package.
+  
+    If one want more options, then \textsc{Surf-Ex} is the software of choice,
+    however this has proven to be very difficult to install as it uses
+    \textsc{Surf} as a back end. In any case, the software can be found on
+    \begin{center}
+        \url{http://surfex.algebraicsurface.net} 
+    \end{center}
+    along with installation guidelines.
+
     \section{Code snippets}
     \label{sec:code_snippets}
         
     \lstset{deletekeywords={xrange}}
-    \begin{TMcode}{python}{curves.py - \url{http://stackoverflow.com/a/2484594}}{Plotting algebraic curves}
+    \begin{TMcode}{python}{curves.py -
+        \url{http://stackoverflow.com/a/2484594}}{Plotting algebraic curves}
     import matplotlib.pyplot
     from numpy import arange
     from numpy import meshgrid
@@ -937,4 +1073,3 @@
 
     \printbibliography 
 \end{document}
-
