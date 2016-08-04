@@ -1,5 +1,6 @@
 # Visualization of algebraic surfaces
 
+
 ## Feburary 10
 
 Possible problem: "Removing singularities by a series of monoidal transforms"
@@ -53,4 +54,15 @@ Possible problem: "Removing singularities by a series of monoidal transforms"
 ### Software
 
 * Macaulay2
+
+
+## 1. April
+
+* Fixed the subject.
+
+**  Writing about visualization of surfaces and using various algebraic
+surfaces to highlight interesting mathematical properties. (See 'World record
+surfaces by Oliver Labs'). Also, if time, include an appendix that mentions
+some of the various visualization techniques, like ray tracing etc.
+
 
